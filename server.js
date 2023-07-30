@@ -1,9 +1,12 @@
 const express = require('express');
+if (process.env.NODE_ENV !== "production") {
+    require('dotenv').config();
+}
 const path = require('path');
 const mongoose = require('mongoose');
 const app = express();
 const port = process.env.PORT || 3000;
-const DB = "mongodb+srv://ghazanfarmumtaz:news12345@newsarticles.ojmpxjp.mongodb.net/?retryWrites=true&w=majority"
+const DB = process.env.mongo_url
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))
@@ -23,4 +26,4 @@ mongoose.connect(DB).then(()=>{
 })
 
 //starting server
-app.listen(port, () => console.info(`Server is up on http://localhost:${port}`))
+app.listen(port, () => console.info(`Server is up`))
