@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News App Admin Dashboard - Add Admin</title>
+    <link rel="stylesheet" href="../dashboard.css">
+</head>
+<body>
+    <header>
+        <h1> Merupulu News App Admin Dashboard</h1>
+        <!-- Add any navigation or user information here if needed -->
+    </header>
+
+    <div class="container">
+        <%- include('./partials/sidebar')%>
+
+        <div class="main-content">
+            <!-- Add Admin Form -->
+            <h2>Add Admin</h2>
+            <div class="add-admin-form">
+                <form action="/admin/addAdmin" method="POST">
+                    <div class="form-group">
+                        <label for="admin-name">Name</label>
+                        <input type="text" id="admin-username" name = "name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-email">Email</label>
+                        <input type="email" id="admin-username" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="admin-password">Password:</label>
+                        <input type="password" id="admin-password" name="password" required>
+                    </div>
+
+                    <button type="submit" class="btn-add-admin">Add Admin</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

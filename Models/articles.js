@@ -21,7 +21,11 @@ const newsSchema = mongoose.Schema({
         type: String,
         default: ""
     },
-
+   
+    source:{
+        type: String,
+        default: ""
+    },
     description:{
         type: String,
         required:true,

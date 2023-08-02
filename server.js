@@ -1,4 +1,7 @@
 const express = require('express');
+const session = require('express-session');
+const methodOverride = require('method-override');
+const MongoDBStore = require("connect-mongodb-session")(session);
 if (process.env.NODE_ENV !== "production") {
     require('dotenv').config();
 }
@@ -8,16 +11,37 @@ const app = express();
 const port = process.env.PORT || 3000;
 const DB = process.env.mongo_url
 
+//mongo session and express session
+const store = new MongoDBStore({
+    uri: DB,
+    collection: "mySessions",
+  });
+
+  app.use(
+    session({
+      secret: "secret",
+      resave: false,
+      saveUninitialized: false,
+      store: store,
+    })
+  );
+  //<--------------------------------------->
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))
 //routes imports
 const newsRouter = require('./routes/news');
+const authRouter = require('./routes/auth');
+const dashRouter = require('./routes/dashboard.js');
 //middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'))
+app.use(methodOverride('_method'));
 
 app.use(newsRouter);
+app.use(authRouter);
+app.use(dashRouter)
 //db connection
 mongoose.connect(DB).then(()=>{
     console.log('connection successful');

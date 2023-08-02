@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Idk</title>
-    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="/style.css" />
     <link
       href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
       rel="stylesheet"
@@ -16,7 +16,7 @@
     <section class="container forms">
       <div class="form login">
         <div class="form-content">
-          <form action="/admin/newNews" method="POST">
+          <form action="/admin/article/<%=article._id%>?_method=PUT" method="POST">
             <div class="field input-field input-label">
               <label for="author">Author</label>
               <input
@@ -24,6 +24,7 @@
                 id="author"
                 name="author"
                 placeholder="FullName"
+                value="<%= article.author %>"
                 class="input"
               />
             </div>
@@ -34,17 +35,19 @@
                 id="content"
                 name="content"
                 placeholder="Content"
+                value="<%= article.content %>"
                 class="input"
               />
             </div>
             <div class="input-label">
               <label for="desc">Description</label>
-              <textarea rows="4" cols="55" id="desc" name="desc"></textarea>
+              <textarea rows="4" cols="55" id="desc" name="desc"><%= article.description %></textarea>
             </div>
             <label for="category">Category</label>
             <select name="category" id="category">
-              <option value="india" selected>India</option>
+              <option value= " " selected> choose category</option>
               <option value="Health">Health</option>
+              <option value="India">India</option>
               <option value="Business">Business</option>
               <option value="Vehicles">Vehicles</option>
               <option value="Entertainment">Entertainment</option>
@@ -107,6 +110,7 @@
                 id="source"
                 name="source"
                 placeholder="Source"
+                value="<%= article.source %>"
                 class="input"
               />
             </div>
@@ -117,6 +121,7 @@
                 name="title"
                 id="title"
                 placeholder="Title"
+                value="<%= article.title %>"
                 class="input"
               />
             </div>
@@ -141,6 +146,6 @@
       type="text/javascript"
     ></script>
 
-    <script src="../upload_widget.js"></script>
+    <script src="/upload_widget.js"></script>
   </body>
 </html>

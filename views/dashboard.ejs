@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MERUPULU NEWS</title>
+    <link rel="stylesheet" href="../dashboard.css">
+</head>
+<body>
+    <header>
+        <h1>Merupulu News App Admin Dashboard</h1>
+        <!-- Add any navigation or user information here if needed -->
+    </header>
+
+    <div class="container">
+        <%- include('./partials/sidebar')%>
+
+        <div class="main-content">
+            <!-- Total Articles Card  -->
+            <div class="card">
+                <h2>Total Articles</h2>
+                <p><%= articleCount %></p> 
+            </div>  
+
+            <!-- Total Users Card -->
+            <div class="card">
+                <h2>Total Users</h2>
+                <p><%= userCount %></p> 
+            </div>
+
+            <!-- News Articles Table -->
+            <h2>Manage News Articles</h2>
+            <div class="articles-table">
+                <!-- Table to display news articles with options to delete/edit -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Populate table rows with news articles from the database -->
+                        <% for (let article of articles) { %>
+                        <tr>
+                            <% date = article.publishedAt.toString().substring(0,16) %>
+                            <% title = article.title.toString().substring(0,50) %>
+                            <td><%= title %></td>
+                            <td><%= article.author %></td>
+                            <td><%= date %></td>
+                            <td>
+                                <a href="/admin/article/<%= article._id%>/edit"><button class="btn-edit">Edit</button></a>
+                                <form style="display: inline;" method="POST" action="/admin/article/<%= article._id%>?_method=DELETE">
+                                <button class="btn-delete">Delete</button>
+                            </form>
+                            </td>
+                        </tr>
+                        <% } %>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
