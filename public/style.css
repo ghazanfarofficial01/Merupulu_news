@@ -1,191 +1,132 @@
-/* Google Fonts - Poppins */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
-
-* {
+body {
+  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
-.hide {
-  display: none;
 }
 
-.sbm-btn {
-  height: 3rem;
-  background-color: rgb(51, 51, 171);
-  border: none;
-  font-size: 14px;
-  color: white;
+header {
+  background-color: #C70001;
+  color: #fff;
+  padding: 10px;
   text-align: center;
-  cursor: pointer;
-}
-
-/* .submit-btn {
-  margin: 20px;
-  margin-top: 20px;
-  margin-left: 80%;
-}
-.submit-btn > button {
-  width: 4rem;
-  margin: 0.5em 0;
-  padding: 0.8em 2.5em;
-  cursor: pointer;
-  background: #503df4;
-  border: none;
-  border-radius: 0.4em;
-  text-transform: uppercase;
-  font-size: 14px;
-  font-family: "Work Sans", sans-serif;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-} */
-.cloudinary-button {
-  max-width: 20rem;
-  margin-left: 40px;
-}
-select {
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  margin-top: 10px;
-  width: 20rem;
-}
-option {
-  text-align: center;
-}
-select:focus {
-  outline: none;
-}
-
-.input-label {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 1rem;
-}
-
-.input-label > label {
-  width: 3rem;
-}
-
-.input-label > input,
-textarea {
-  max-width: 20rem;
-  margin-left: 40px;
-  height: 3rem;
-}
-textarea {
-  margin-top: 10px;
-  height: 5rem;
 }
 
 .container {
-  height: 100vh;
-  width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #fefefe;
-  column-gap: 30px;
+  justify-content: space-between;
 }
-.form {
-  position: absolute;
-  max-width: 630px;
-  width: 100%;
-  padding: 30px;
-  border-radius: 6px;
-  background: #fff;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+.sidebar {
+  width: 20%;
+  height: 100vh;
+  background-color: #f1f1f1;
+  padding: 20px;
 }
-.form.signup {
-  opacity: 0;
-  pointer-events: none;
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
 }
-.forms.show-signup .form.signup {
-  opacity: 1;
-  pointer-events: auto;
+
+.sidebar li {
+  margin-bottom: 10px;
+  font-weight: 570;
 }
-.forms.show-signup .form.login {
-  opacity: 0;
-  pointer-events: none;
-}
-header {
-  font-size: 28px;
-  font-weight: 600;
-  color: #232836;
-  text-align: center;
-}
-form {
-  margin-top: 30px;
-}
-.form .field {
-  position: relative;
-  height: 50px;
-  width: 100%;
-  margin-top: 20px;
-  border-radius: 6px;
-}
-.field input,
-.field button {
-  /* height: 100%; */
-  width: 100%;
-  border: none;
-  font-size: 16px;
-  font-weight: 400;
-  border-radius: 6px;
-}
-.field input {
-  outline: none;
-  padding: 0 15px;
-  border: 1px solid#CACACA;
-}
-.field input:focus {
-  border-bottom-width: 2px;
-}
-.eye-icon {
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  font-size: 18px;
-  color: #8b8b8b;
-  cursor: pointer;
-  padding: 5px;
-}
-.field button {
-  color: #fff;
-  background-color: #0171d3;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-.field button:hover {
-  background-color: #016dcb;
-}
-.form-link {
-  text-align: center;
-  margin-top: 10px;
-}
-.form-link span,
-.form-link a {
-  font-size: 14px;
-  font-weight: 400;
-  color: #232836;
-}
-.form a {
-  color: #0171d3;
+
+.sidebar a {
   text-decoration: none;
-}
-.form-content a:hover {
-  text-decoration: underline;
-}
-
-@media screen and (max-width: 400px) {
-  .form {
-    padding: 20px 10px;
-  }
+  color: #333;
+  padding: 5px 10px;
+  display: block;
 }
 
-nav a {
+.sidebar a:hover {
+  background-color: #ddd;
+}
+
+.main-content {
+  width: 75%;
+  padding: 20px;
+  background-color: #f9f9f9;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.post-article-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
   font-weight: bold;
 }
+
+input,
+textarea,
+select {
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+}
+button.btn-upload-image {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+}
+
+button.btn-upload-image:hover {
+  background-color: #0056b3;
+}
+
+button {
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
+  /* New styles for Cloudinary button */
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+
+
+
+
+
+/* ------------------------- */

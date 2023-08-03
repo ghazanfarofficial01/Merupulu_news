@@ -1,156 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MERUPULU</title>
-    <!-- bootstrap cdn -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <link rel="stylesheet" href="/style.css" />
-    <link
-      href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <nav class="navbar bg-body-tertiary ">
-      <div class="container-fluid ">
-        <a class="navbar-brand" href="/admin/dashboard">
-          <img src="https://res.cloudinary.com/dydvdhjky/image/upload/v1690894435/logo_dzsncw.png" alt="Logo" width="65" height="54" class="d-inline-block align-text-center">
-          MERUPULU NEWS
-        </a>
-        <a href="/admin/dashboard" class=""><button class="btn btn-secondary ">HOME</button></a>
-      </div>
-    </nav>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body class="post-article-page">
+    <header>
+        <h1>Merupulu News App Admin Dashboard</h1>
+        <!-- Add any navigation or user information here if needed -->
+    </header>
 
-    <section class="container forms">
-      <div class="form login">
-        <div class="form-content">
-          <form action="/admin/article/<%=article._id%>?_method=PUT" method="POST">
-            <div class="field input-field input-label">
-              <label for="author">Author</label>
-              <input
-                type="text"
-                id="author"
-                name="author"
-                placeholder="FullName"
-                value="<%= article.author %>"
-                class="input"
-              />
-            </div>
-            <div class="field input-field input-label">
-              <label for="content">Content</label>
-              <input
-                type="text"
-                id="content"
-                name="content"
-                placeholder="Content"
-                value="<%= article.content %>"
-                class="input"
-              />
-            </div>
-            <div class="input-label">
-              <label for="desc">Description</label>
-              <textarea rows="4" cols="55" id="desc" name="desc"><%= article.description %></textarea>
-            </div>
-            <label for="category">Category</label>
-            <select name="category" id="category">
-              <option value= " " selected> choose category</option>
-              <option value="Health">Health</option>
-              <option value="India">India</option>
-              <option value="Business">Business</option>
-              <option value="Vehicles">Vehicles</option>
-              <option value="Entertainment">Entertainment</option>
-              <option
-                value="Travel
-              "
-              >
-                Travel
-              </option>
-              <option
-                value="science
-              "
-              >
-                science
-              </option>
-              <option
-                value="Sports
-              "
-              >
-                Sports
-              </option>
-              <option
-                value="Technology
-              "
-              >
-                Technology
-              </option>
-              <option
-                value="World
+    <div class="container">
+        <!-- sidebar -->
+        <%- include('./partials/sidebar')%>
 
-              "
-              >
-                World
-              </option>
-              <option
-                value="Education
+        <div class="main-content">
+            <!-- Post Article Form -->
+            <h2>Post Article</h2>
+            <div class="post-article-form">
+                <form action="/admin/article/<%=article._id%>?_method=PUT" method="POST">
+                    <div class="form-group">
+                        <label for="article-title">Title:</label>
+                        <input type="text" name="title" id="article-title" required value="<%= article.title %>">
+                    </div>
 
-              "
-              >
-                Education
-              </option>
-              <option
-                value="Viral
+                    <div class="form-group">
+                        <label for="article-description">Description:</label>
+                        <textarea id="article-description" rows="3" required name="desc"><%= article.description %></textarea>
+                    </div>
 
-              "
-              >
-                Viral
-              </option>
-              <option
-                value="Art
-              "
-              >
-                Art
-              </option>
-            </select>
-            <div class="field input-field input-label">
-              <label for="source">Source</label>
-              <input
-                type="text"
-                id="source"
-                name="source"
-                placeholder="Source"
-                value="<%= article.source %>"
-                class="input"
-              />
+                    <div class="form-group">
+                        <label for="article-content">Content:</label>
+                        <textarea id="article-content" rows="6" required name="content"><%= article.content %></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="article-author">Author:</label>
+                        <input type="text" name="author" id="article-author" required value="<%= article.author %>">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="article-source">Source:</label>
+                        <input type="text" name="source" id="article-source" required value="<%= article.source %>">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="article-category">Category:</label>
+                        <select id="article-category" required name="category">
+                            <option value="" disabled selected>Select a category</option>
+                            <option value="Politics">Politics</option>
+                            <option value="Sports">Sports</option>
+                            <option value="Technology">Technology</option>
+                            <option value="Health">Health</option>
+                            <option value="India">India</option>
+                           <option value="Business">Business</option>
+                           <option value="Vehicles">Vehicles</option>
+                         <option value="Entertainment">Entertainment</option>
+                            <!-- Add more options as needed -->
+                        </select>
+                    </div>
+                    <diV>
+                    <button type="button" class="btn-upload-image" id="upload_widget">Upload Image</button>
+                    <div>
+                        <input class="hide" style="display: none;" type="url" id="url" name="url" />
+                      </div>
+                </diV>
+
+                    <button type="submit" class="btn-post-article">Post Article</button>
+                </form>
             </div>
-            <div class="field input-field input-label">
-              <label for="title">Title</label>
-              <input
-                type="text"
-                name="title"
-                id="title"
-                placeholder="Title"
-                value="<%= article.title %>"
-                class="input"
-              />
-            </div>
-            <div class="field input-field input-label">
-              <label for="image">Image</label>
-              <button id="upload_widget" class="cloudinary-button">
-                Upload images
-              </button>
-              <div class="input-label desc">
-                <input class="hide" type="url" id="url" name="url" />
-              </div>
-            </div>
-            <!-- <div class="field input-field input-label"> </div> -->
-            <button type="submit" class="sbm-btn field">Submit</button>
-          </form>
         </div>
-      </div>
-    </section>
+    </div>
 
     <script
       src="https://widget.cloudinary.com/v2.0/global/all.js"
@@ -158,7 +80,5 @@
     ></script>
 
     <script src="/upload_widget.js"></script>
-    <!-- bootstrap script -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-  </body>
+</body>
 </html>

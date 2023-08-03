@@ -12,7 +12,7 @@ dashRouter.get('/admin/dashboard',isAuth, async(req, res) => {
     try{
       const articleCount = await News.countDocuments({})
       const userCount = await User.countDocuments({userType: 'normalUser'})
-      const articles = await News.find({}).limit(10).exec();
+      const articles = await News.find({}).limit(10).sort({publishedAt:-1}).exec();
 
       //console.log(articles);
     res.render("dashboard",{articleCount,userCount,articles})
@@ -24,7 +24,7 @@ dashRouter.get('/admin/dashboard',isAuth, async(req, res) => {
   //all article page render route
   dashRouter.get('/admin/allArticles', isAuth, async (req, res) => {
     try{
-      const articles = await News.find({}).sort({publishedAt:-1}).limit(10).exec();
+      const articles = await News.find({}).sort({publishedAt:-1}).exec();
       //console.log(articles)
       res.render("allArticles",{articles});
     } catch(e){
