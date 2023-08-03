@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merupulu</title>
+    <link rel="stylesheet" href="../dashboard.css">
+</head>
+<body>
+    <header>
+        <h1>Merupulu News App Admin Dashboard</h1>
+        <!-- Add any navigation or user information here if needed -->
+    </header>
+
+    <div class="container">
+        <!-- sidebar -->
+        <%- include('./partials/sidebar')%>
+
+        <div class="main-content">
+            <!-- All Articles Table -->
+            <h2>All Users</h2>
+            <div class="articles-table">
+                <!-- Table to display all articles -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <!-- <th>Date</th>
+                            <th>Action</th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Populate table rows with all articles from the database -->
+                        <% for (let user of users) { %>
+                        <tr>
+                            
+                            <td><%= user.name %></td>
+                            <td><%= user.email %></td>
+                            
+                        </tr>
+                        <% } %>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -11,7 +11,7 @@ const User = require('../Models/user');
 dashRouter.get('/admin/dashboard',isAuth, async(req, res) => {
     try{
       const articleCount = await News.countDocuments({})
-      const userCount = await User.countDocuments({})
+      const userCount = await User.countDocuments({userType: 'normalUser'})
       const articles = await News.find({}).limit(10).exec();
 
       //console.log(articles);
@@ -31,17 +31,66 @@ dashRouter.get('/admin/dashboard',isAuth, async(req, res) => {
       res.status(500).json({error: e.message})
     }
    })
+  
+   //all users page render route
+   dashRouter.get('/admin/allUsers', isAuth, async (req, res) => {
+    try{
+      let users = await User.find({userType: 'normalUser'});
+      //console.log(articles)
+      if(users<=0){
+        users=[]
+      }
+      res.render("allUsers",{users});
+    } catch(e){
+      res.status(500).json({error: e.message})
+    }
+   })
+    
+//all admins page render route
+dashRouter.get('/admin/allAdmins', isAuth, async (req, res) => {
+  try{
+    const admins = await User.find({userType: 'admin'});
+    const user = await User.findById(req.user);
+    let userType="";
+    
+    if(user){
+    userType =  await user.userType
+    }
+    
+    //console.log()
+    res.render("allAdmins",{admins,userType});
+  } catch(e){
+    res.status(500).json({error: e.message})
+  }
+ })
+ 
+
+ //delete admin
+ dashRouter.delete('/admin/delete/:id',isAuth, async (req,res) =>{
+  try{
+    const {id} = req.params;
+     await User.findByIdAndDelete(id);
+     res.redirect('/admin/allAdmins');
+
+  } catch(e){
+    res.status(500).json({error: e.message})
+  }
+})
+
+
   //add admin
   dashRouter.get("/admin/addAdmin", isAuth,async(req, res) => {
     try{
         const id = req.user;
         const owner = await User.findById(id);
-        console.log(owner.userType);
+        //console.log(owner.userType);
+        if(owner){
         if(owner.userType != "owner"){
           return res
           .status(400)
           .send("Not authorised" );
         }
+      }
        res.render("addAdmin");
     }catch(e){
       res.status(500).json({error: e.message})
@@ -53,12 +102,14 @@ dashRouter.get('/admin/dashboard',isAuth, async(req, res) => {
       //console.log(req.user);
       const id = req.user;
       const owner = await User.findById(id);
-      console.log(owner.userType);
+      //console.log(owner.userType);
+      if(owner){
       if(owner.userType != "owner"){
         return res
         .status(400)
         .send("Not authorised" );
       }
+    }
        let {name,email,password} = req.body;
        const hashedPassword = await bcryptjs.hash(password, 8);
        let user = new User({
@@ -74,7 +125,7 @@ dashRouter.get('/admin/dashboard',isAuth, async(req, res) => {
     }
   })
 
-
+   //article delete route
   dashRouter.delete('/admin/article/:id',isAuth, async (req,res) =>{
     try{
       const {id} = req.params;
@@ -86,6 +137,7 @@ dashRouter.get('/admin/dashboard',isAuth, async(req, res) => {
     }
   })
   
+  //edit articles route
   dashRouter.get("/admin/article/:id/edit",isAuth, async (req, res) => {
      try{
         const article = await News.findById(req.params.id)
@@ -100,11 +152,17 @@ dashRouter.get('/admin/dashboard',isAuth, async(req, res) => {
   })
   
   dashRouter.put('/admin/article/:id',isAuth,async(req,res)=>{
-
-    const article = await News.findById(req.params.id);
-    console.log(req.body.url)
-    res.send(req.body);
+    const id = req.params.id;
+    const article = await News.findById(id);
+    if(req.body.url === ""){
+      req.body.url = article.url;
+    }
+    const updatedArticle = await News.findByIdAndUpdate(id, { ...req.body });
+    //console.log(updatedArticle)
+    res.redirect("/admin/dashboard");
   })
+
+
 
   //LOGOUT
   dashRouter.get("/logout",(req, res) => {

@@ -15,6 +15,7 @@ const DB = process.env.mongo_url
 const store = new MongoDBStore({
     uri: DB,
     collection: "mySessions",
+    expires: 1000 * 60 * 60 * 24
   });
 
   app.use(
@@ -23,6 +24,7 @@ const store = new MongoDBStore({
       resave: false,
       saveUninitialized: false,
       store: store,
+      maxAge: 1000 * 60 * 60 * 24
     })
   );
   //<--------------------------------------->

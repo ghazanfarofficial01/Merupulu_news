@@ -46,4 +46,5 @@ newsRouter.get("/api/news", async(req, res) => {
 });
 
 
+
 module.exports = newsRouter;
