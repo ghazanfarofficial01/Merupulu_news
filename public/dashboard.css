@@ -5,7 +5,7 @@ body {
 }
 
 header {
-    background-color: #333;
+    background-color: #C70001;
     color: #fff;
     padding: 10px;
     text-align: center;
@@ -30,6 +30,7 @@ header {
 
 .sidebar li {
     margin-bottom: 10px;
+    font-weight: 570;
 }
 
 .sidebar a {

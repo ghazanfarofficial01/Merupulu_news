@@ -185,3 +185,7 @@ form {
     padding: 20px 10px;
   }
 }
+
+nav a {
+  font-weight: bold;
+}
