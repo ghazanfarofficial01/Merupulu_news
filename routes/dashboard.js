@@ -157,8 +157,15 @@ dashRouter.get('/admin/allAdmins', isAuth, async (req, res) => {
     if(req.body.url === ""){
       req.body.url = article.url;
     }
+    if(req.body.videoUrl === ""){
+      req.body.url = article.url;
+    }
+    if(!req.body.isBreaking){
+      req.body.isBreaking = false;
+    }
+    //console.log(req.body)
     const updatedArticle = await News.findByIdAndUpdate(id, { ...req.body });
-    //console.log(updatedArticle)
+    //console.log(req.body)
     res.redirect("/admin/dashboard");
   })
 

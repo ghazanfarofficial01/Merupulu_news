@@ -1,77 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MERUPULU NEWS</title>
-    <link rel="stylesheet" href="../style.css">
-</head>
-<body class="post-article-page">
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body class="post-article-page">
     <header>
-        <h1>News App Admin Dashboard</h1>
-        <!-- Add any navigation or user information here if needed -->
+      <h1>News App Admin Dashboard</h1>
+      <!-- Add any navigation or user information here if needed -->
     </header>
 
     <div class="container">
-        <!-- sidebar -->
-        <%- include('./partials/sidebar')%>
+      <!-- sidebar -->
+      <%- include('./partials/sidebar')%>
 
-        <div class="main-content">
-            <!-- Post Article Form -->
-            <h2>Post Article</h2>
-            <div class="post-article-form">
-                <form action="/admin/newNews" method="POST">
-                    <div class="form-group">
-                        <label for="article-title">Title:</label>
-                        <input type="text" name="title" id="article-title" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="article-description">Description:</label>
-                        <textarea id="article-description" rows="3" required name="desc"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="article-content">Content:</label>
-                        <textarea id="article-content" rows="6" required name="content"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="article-author">Author:</label>
-                        <input type="text" name="author" id="article-author" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="article-source">Source:</label>
-                        <input type="text" name="source" id="article-source" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="article-category">Category:</label>
-                        <select id="article-category" required name="category">
-                            <option value="" disabled selected>Select a category</option>
-                            <option value="Politics">Politics</option>
-                            <option value="Sports">Sports</option>
-                            <option value="Technology">Technology</option>
-                            <option value="Health">Health</option>
-                            <option value="India">India</option>
-                           <option value="Business">Business</option>
-                           <option value="Vehicles">Vehicles</option>
-                         <option value="Entertainment">Entertainment</option>
-                            <!-- Add more options as needed -->
-                        </select>
-                    </div>
-                    <diV>
-                    <button type="button" class="btn-upload-image" id="upload_widget">Upload Image</button>
-                    <div>
-                        <input class="hide" style="display: none;" type="url" id="url" name="url" />
-                      </div>
-                </diV>
-
-                    <button type="submit" class="btn-post-article">Post Article</button>
-                </form>
+      <div class="main-content">
+        <!-- Post Article Form -->
+        <h2>Post Article</h2>
+        <div class="post-article-form">
+          <form action="/admin/newNews" method="POST">
+            <div class="breaking-news-checkbox">
+              <label for="breaking-news">Breaking News</label>
+              <input
+                type="checkbox"
+                id="breaking-news"
+                name="isBreaking"
+                value="true"
+                checked
+              />
             </div>
+            <div class="form-group">
+              <label for="article-title">Title:</label>
+              <input type="text" name="title" id="article-title" required />
+            </div>
+
+            <div class="form-group">
+              <label for="article-description">Description:</label>
+              <textarea
+                id="article-description"
+                rows="3"
+                required
+                name="desc"
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="article-content">Content:</label>
+              <textarea
+                id="article-content"
+                rows="6"
+                required
+                name="content"
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="article-author">Reporter:</label>
+              <input type="text" name="author" id="article-author" required />
+            </div>
+
+            <div class="form-group">
+              <label for="article-source">Source:</label>
+              <input type="text" name="source" id="article-source" required />
+            </div>
+
+            <div class="form-group">
+              <label for="article-category">Category:</label>
+              <select id="article-category" required name="category">
+                <option value="" disabled selected>Select a category</option>
+                <option value="national">National</option>
+                <option value="international">International</option>
+                <option value="education">Education</option>
+
+                <option value="world">World</option>
+                <option value="travel">Travel</option>
+                <option value="science">Science</option>
+                <option value="viral">Viral</option>
+                <option value="art">Art</option>
+                <option value="crime">Crime</option>
+
+                <option value="sports">Sports</option>
+                <option value="technology">Technology</option>
+                <option value="health">Health</option>
+                <option value="india">India</option>
+                <option value="business">Business</option>
+                <option value="vehicles">Vehicles</option>
+                <option value="entertainment">Entertainment</option>
+                <!-- Add more options as needed -->
+              </select>
+            </div>
+            <diV>
+              <button type="button" class="btn-upload-image" id="upload_widget">
+                Upload Image
+              </button>
+              <div>
+                <input
+                  class="hide"
+                  style="display: none"
+                  type="url"
+                  id="url"
+                  name="url"
+                />
+              </div>
+            </diV>
+            <!-- videoupload -->
+            <diV>
+                <button type="button" class="btn-upload-image" id="upload_widget2">
+                  Upload Video
+                </button>
+                <div>
+                  <input
+                    
+                    style="display: none"
+                    type="url"
+                    id="videoUrl"
+                    name="VideoUrl"
+                  />
+                </div>
+              </diV>
+
+            <button type="submit" class="btn-post-article">Post Article</button>
+          </form>
         </div>
+      </div>
     </div>
 
     <script
@@ -80,5 +133,5 @@
     ></script>
 
     <script src="../upload_widget.js"></script>
-</body>
+  </body>
 </html>

@@ -1,5 +1,11 @@
 const mongoose = require('mongoose')
 const newsSchema = mongoose.Schema({
+    isBreaking:{
+       type:Boolean,
+       default:false,
+       required:true
+    },
+
     title:{
         type: String,
         retquired: true,
@@ -14,7 +20,14 @@ const newsSchema = mongoose.Schema({
     
     url:{
        type: String,
+       trim: true,
        default: ""
+    },
+    
+    videoUrl:{
+        type: String,
+        trim: true,
+        default: ""
     },
 
     content:{
@@ -26,6 +39,7 @@ const newsSchema = mongoose.Schema({
         type: String,
         default: ""
     },
+
     description:{
         type: String,
         required:true,
