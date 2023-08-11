@@ -20,7 +20,7 @@ const store = new MongoDBStore({
 
   app.use(
     session({
-      secret: "secret",
+      secret: process.env.session_secret,
       resave: false,
       saveUninitialized: false,
       store: store,
@@ -35,6 +35,7 @@ app.set('views', path.join(__dirname, 'views'))
 const newsRouter = require('./routes/news');
 const authRouter = require('./routes/auth');
 const dashRouter = require('./routes/dashboard.js');
+const changePasswordRouter = require('./routes/pswrdChange');
 //middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -43,7 +44,8 @@ app.use(methodOverride('_method'));
 
 app.use(newsRouter);
 app.use(authRouter);
-app.use(dashRouter)
+app.use(dashRouter);
+app.use(changePasswordRouter);  
 //db connection
 mongoose.connect(DB).then(()=>{
     console.log('connection successful');

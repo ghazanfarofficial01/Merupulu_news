@@ -38,6 +38,8 @@
                             <th>Title</th>
                             <th>Author</th>
                             <th>Date</th>
+                            <th>Image</th>
+                            <th>Video</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -50,6 +52,8 @@
                             <td><%= title %></td>
                             <td><%= article.author %></td>
                             <td><%= date %></td>
+                            <td><%= article.url === "" ? '❌' : '✔️' %></td>
+                            <td><%= article.videoUrl === "" ? '❌' : '✔️' %></td>
                             <td>
                                 <a href="/admin/article/<%= article._id%>/edit"><button class="btn-edit">Edit</button></a>
                                 <form style="display: inline;" method="POST" action="/admin/article/<%= article._id%>?_method=DELETE">

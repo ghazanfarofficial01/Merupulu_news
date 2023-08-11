@@ -12,7 +12,7 @@ dashRouter.get('/admin/dashboard',isAuth, async(req, res) => {
     try{
       const articleCount = await News.countDocuments({})
       const userCount = await User.countDocuments({userType: 'normalUser'})
-      const articles = await News.find({}).limit(10).sort({publishedAt:-1}).exec();
+      const articles = await News.find({published:true}).limit(10).sort({publishedAt:-1}).exec();
 
       //console.log(articles);
     res.render("dashboard",{articleCount,userCount,articles})
@@ -20,11 +20,32 @@ dashRouter.get('/admin/dashboard',isAuth, async(req, res) => {
       res.status(500).json({error: e.message})
     }
   })
-  
+  //unpushed articles render route
+   dashRouter.get('/admin/unpublished',isAuth,async (req,res)=>{
+    try{
+      const articles = await News.find({published:false}).sort({publishedAt:-1}).exec();
+      //console.log(articles)
+      res.render("allUnpublished",{articles});
+    } catch(e){
+      res.status(500).json({error: e.message})
+    }
+   })
+   
+   //publishing unpublished articles
+   dashRouter.put('/admin/article/publish/:id',isAuth,async(req,res)=>{
+    const id = req.params.id;
+    const article = await News.findById(id);
+    
+    const updatedArticle = await News.findByIdAndUpdate(id, { published:true, publishedAt:Date.now()});
+    //console.log(updatedArticle);
+    res.redirect("/admin/unpublished");
+  })
+
+
   //all article page render route
   dashRouter.get('/admin/allArticles', isAuth, async (req, res) => {
     try{
-      const articles = await News.find({}).sort({publishedAt:-1}).exec();
+      const articles = await News.find({published:true}).sort({publishedAt:-1}).exec();
       //console.log(articles)
       res.render("allArticles",{articles});
     } catch(e){

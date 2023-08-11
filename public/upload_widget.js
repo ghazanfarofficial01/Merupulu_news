@@ -23,6 +23,12 @@ const myWidget = cloudinary.createUploadWidget(
   (error, result) => {
     if (!error && result && result.event === "success") {
       //console.log("Done! Here is the image info: ", result.info);
+      const thumbnail = result.info.thumbnail_url;
+      const thumbnail_img = document.getElementById("thumbnail_img");
+      thumbnail_img.src = thumbnail;
+      thumbnail_img.style = "display: inline-block"
+
+      document.querySelector(".thmb_holder1").style = "display: flex; margin-top:5px; justify-content: center;"
       // document
       //   .getElementById("uploadedimage")
       //   .setAttribute("src", result.info.secure_url);
@@ -65,6 +71,12 @@ const myWidget2 = cloudinary.createUploadWidget(
   (error, result) => {
     if (!error && result && result.event === "success") {
       //console.log("Done! Here is the image info: ", result.info);
+      const thumbnail = result.info.thumbnail_url;
+      const thumbnail_img = document.getElementById("thumbnail_vid");
+      thumbnail_img.src = thumbnail;
+      thumbnail_img.style = "display: inline-block"
+
+      document.querySelector(".thmb_holder2").style = "display: flex; margin-top:5px; justify-content: center;"
       // document
       //   .getElementById("uploadedimage")
       //   .setAttribute("src", result.info.secure_url);

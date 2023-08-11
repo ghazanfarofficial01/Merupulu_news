@@ -37,7 +37,7 @@
             </div>
 
             <div class="form-group">
-              <label for="article-description">Description:</label>
+              <label for="article-description">Short Description:</label>
               <textarea
                 id="article-description"
                 rows="3"
@@ -70,24 +70,28 @@
               <label for="article-category">Category:</label>
               <select id="article-category" required name="category">
                 <option value="" disabled selected>Select a category</option>
+                <option value="telangana">Telangana</option>
+                <option value="andhra pradesh">Andhra Pradesh</option>
                 <option value="national">National</option>
-                <option value="international">International</option>
-                <option value="education">Education</option>
+                <option value="global">Global</option>
+                <option value="educational">Study/Career</option>
+                <option value="political">Political</option>
+                <option value="cinema">Cinema</option>
+                <option value="business">Business</option>
+                <option value="sports">Sports</option>
+                <option value="crime">Crime</option>
+                <option value="health">Health</option>
+                <option value="lifestyle">Lifestyle</option>
 
-                <option value="world">World</option>
-                <option value="travel">Travel</option>
+                <!-- <option value="travel">Travel</option>
                 <option value="science">Science</option>
                 <option value="viral">Viral</option>
                 <option value="art">Art</option>
-                <option value="crime">Crime</option>
-
-                <option value="sports">Sports</option>
                 <option value="technology">Technology</option>
-                <option value="health">Health</option>
                 <option value="india">India</option>
-                <option value="business">Business</option>
                 <option value="vehicles">Vehicles</option>
                 <option value="entertainment">Entertainment</option>
+                <option value="international">International</option> -->
                 <!-- Add more options as needed -->
               </select>
             </div>
@@ -95,6 +99,11 @@
               <button type="button" class="btn-upload-image" id="upload_widget">
                 Upload Image
               </button>
+
+              <div class="thmb_holder1" style="display: none">
+                <img id="thumbnail_img" style="display: none" />
+              </div>
+
               <div>
                 <input
                   class="hide"
@@ -107,19 +116,27 @@
             </diV>
             <!-- videoupload -->
             <diV>
-                <button type="button" class="btn-upload-image" id="upload_widget2">
-                  Upload Video
-                </button>
-                <div>
-                  <input
-                    
-                    style="display: none"
-                    type="url"
-                    id="videoUrl"
-                    name="videoUrl"
-                  />
-                </div>
-              </diV>
+              <button
+                type="button"
+                class="btn-upload-image"
+                id="upload_widget2"
+              >
+                Upload Video
+              </button>
+
+              <div class="thmb_holder2">
+                <img id="thumbnail_vid" style="display: none" />
+              </div>
+
+              <div>
+                <input
+                  style="display: none"
+                  type="url"
+                  id="videoUrl"
+                  name="videoUrl"
+                />
+              </div>
+            </diV>
 
             <button type="submit" class="btn-post-article">Post Article</button>
           </form>
