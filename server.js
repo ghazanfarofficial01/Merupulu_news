@@ -36,6 +36,8 @@ const newsRouter = require('./routes/news');
 const authRouter = require('./routes/auth');
 const dashRouter = require('./routes/dashboard.js');
 const changePasswordRouter = require('./routes/pswrdChange');
+const eventRouter = require('./routes/event');
+const advRouter = require('./routes/adv');
 //middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -46,6 +48,8 @@ app.use(newsRouter);
 app.use(authRouter);
 app.use(dashRouter);
 app.use(changePasswordRouter);  
+app.use(eventRouter)
+app.use(advRouter)
 //db connection
 mongoose.connect(DB).then(()=>{
     console.log('connection successful');

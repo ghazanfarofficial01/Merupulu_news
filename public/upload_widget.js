@@ -51,6 +51,8 @@ document.getElementById("upload_widget").addEventListener(
   false
 );
 
+
+
 //video upload
 const myWidget2 = cloudinary.createUploadWidget(
   {

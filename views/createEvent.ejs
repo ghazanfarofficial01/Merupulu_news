@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MERUPULU NEWS</title>
+    <link rel="stylesheet" href="../style.css" />
+    <!-- Include Cloudinary widget library -->
+    <script
+      src="https://widget.cloudinary.com/v2.0/global/all.js"
+      type="text/javascript"
+    ></script>
+  </head>
+  <body class="event-page">
+    <header>
+      <h1>News App Admin Dashboard</h1>
+    </header>
+
+    <div class="container">
+      <%- include('./partials/sidebar')%>
+
+      <div class="main-content">
+        <h2>Create Event</h2>
+        <div class="event-form">
+          <form action="/admin/createEvent" method="POST">
+            <div class="form-group">
+              <label for="event-title">Event Title:</label>
+              <input type="text" id="event-title" name="eventTitle" />
+            </div>
+
+            <div class="form-group">
+              <label for="event-url">Event Link:</label>
+              <input type="url" id="event-url" name="eventUrl" />
+            </div>
+
+            <div class="form-group">
+              <label>Event Image:</label>
+              <button
+                type="button"
+                class="btn-upload-image"
+                id="cloudinary-upload-event-image"
+              >
+                Upload Image
+              </button>
+              <input
+                type="url"
+                name="eventResourceUrl"
+                style="display: none"
+                id="event-image"
+                required
+              />
+              <div class="thmb_holder">
+                <img id="thumbnail" style="display: none" />
+              </div>
+            </div>
+
+            <button type="submit" class="btn-create-event">Create Event</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Function to handle Cloudinary upload for event image
+      function handleCloudinaryEventImageUpload() {
+        cloudinary.openUploadWidget(
+          {
+            cloudName: "dydvdhjky",
+            uploadPreset: "fii6w2nc",
+            folder: "event_images",
+            // cropping: false,
+            multiple: false,
+            //resourceType: "image",
+            // maxImageFileSize: 5000000, // 5 MB
+            sources: ["local", "camera", "url"],
+            // defaultSource: 'local',
+            // showPoweredBy: false,
+            // showAdvancedOptions: false,
+            // croppingAspectRatio: 16 / 9,
+            // croppingDefaultSelectionRatio: 16 / 9,
+            // croppingValidateDimensions: true,
+            // showCloseButton: true,
+            // showUploadMoreButton: false,
+          },
+          function (error, result) {
+            if (!error && result && result.event === "success") {
+              console.log("Image uploaded successfully:", result.info);
+              const eventImage = document.getElementById("event-image");
+              eventImage.value = result.info.secure_url;
+              //for thumbnail
+              const thumbnail = result.info.thumbnail_url;
+              const thumbnail_img = document.getElementById("thumbnail");
+              thumbnail_img.src = thumbnail;
+              thumbnail_img.style = "display: inline-block";
+
+              document.querySelector(".thmb_holder").style =
+                "display: flex; margin-top:5px; justify-content: center;";
+            } else {
+              console.error("Error uploading image:", error);
+            }
+          }
+        );
+      }
+
+      // Add event listener to the Cloudinary event image upload button
+      document
+        .getElementById("cloudinary-upload-event-image")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          handleCloudinaryEventImageUpload();
+        });
+    </script>
+  </body>
+</html>

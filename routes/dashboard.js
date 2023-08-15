@@ -52,7 +52,11 @@ dashRouter.get('/admin/dashboard',isAuth, async(req, res) => {
       res.status(500).json({error: e.message})
     }
    })
-  
+   
+   
+
+   
+
    //all users page render route
    dashRouter.get('/admin/allUsers', isAuth, async (req, res) => {
     try{

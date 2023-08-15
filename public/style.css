@@ -150,3 +150,8 @@ button:hover {
 
 
 
+/* ----------------------------------- */
+
+.event-page #event-title {
+  width: calc(100% - 23px); /* Adjust width based on button widths */
+}
