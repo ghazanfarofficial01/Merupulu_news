@@ -101,4 +101,54 @@ document.getElementById("upload_widget2").addEventListener(
   false
 );
 
+//making two functions for filling the hidden input field of image url or video url and also showing thumbnail in select resource from gallery section
+ const imageInputFiller = function (url) {
+      //const thumbnail = result.info.thumbnail_url;
+      // console.log("reached......");
+      // const thumbnail_img = document.getElementById("thumbnail_gallery");
+      // thumbnail_img.src = url;
+      // thumbnail_img.style = "display: inline-block  width:10px; height: 20px;"
+      // document.querySelector(".thmb_holder0").style = "display: flex; margin-top:5px; justify-content: center;"
+      
+      const descriptionTextArea = document.getElementById("url");
+      
+      const newDescription = url;
+      descriptionTextArea.value = newDescription;
+ }
+
+ const videoInputFiller = function(url) {
+  // const thumbnail_img = document.getElementById("thumbnail_gallery");
+  // thumbnail_img.src = url;
+  // thumbnail_img.style = "display: inline-block"
+  // document.querySelector(".thmb_holder0").style = "display: flex; margin-top:5px; justify-content: center;"
+
+  const descriptionTextArea = document.getElementById("videoUrl");
+  
+  const newDescription = url;
+  descriptionTextArea.value = newDescription;
+
+ }
+  //this js code is to open gallery popup and get resouse url of a particular resource
+   
+    document.getElementById('select-from-gallery').addEventListener('click', function () {
+        // Open the popup window with predefined gallery URL
+        var galleryPopup = window.open('/admin/galleryPopup', 'Gallery', 'width=800,height=600');
+        
+        // Handle communication between popup and parent window
+        window.addEventListener('message', function (event) {
+            if (event.data && event.data.imageUrl) {
+              //console.log(event.data.type)
+              if(event.data.type === 'image') {
+                imageInputFiller(event.data.imageUrl);
+              }
+
+              if(event.data.type === 'video') {
+                videoInputFiller(event.data.imageUrl);
+              }
+                // Update the URL input field with the selected image URL
+                document.getElementById('article-url').value = event.data.imageUrl;
+            }
+        });
+    });
+
 

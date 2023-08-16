@@ -38,6 +38,7 @@ const dashRouter = require('./routes/dashboard.js');
 const changePasswordRouter = require('./routes/pswrdChange');
 const eventRouter = require('./routes/event');
 const advRouter = require('./routes/adv');
+const galleryRouter = require('./routes/gallery');
 //middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -50,6 +51,7 @@ app.use(dashRouter);
 app.use(changePasswordRouter);  
 app.use(eventRouter)
 app.use(advRouter)
+app.use(galleryRouter)
 //db connection
 mongoose.connect(DB).then(()=>{
     console.log('connection successful');

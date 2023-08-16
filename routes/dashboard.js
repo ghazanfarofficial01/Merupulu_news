@@ -53,10 +53,6 @@ dashRouter.get('/admin/dashboard',isAuth, async(req, res) => {
     }
    })
    
-   
-
-   
-
    //all users page render route
    dashRouter.get('/admin/allUsers', isAuth, async (req, res) => {
     try{

@@ -152,6 +152,10 @@ button:hover {
 
 /* ----------------------------------- */
 
-.event-page #event-title {
+.event-page #event-title, #event-url {
+  width: calc(100% - 23px); /* Adjust width based on button widths */
+}
+
+.adv-page #adv-title, #adv-url {
   width: calc(100% - 23px); /* Adjust width based on button widths */
 }
