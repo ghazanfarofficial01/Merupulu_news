@@ -29,15 +29,12 @@ const myWidget = cloudinary.createUploadWidget(
       thumbnail_img.style = "display: inline-block"
 
       document.querySelector(".thmb_holder1").style = "display: flex; margin-top:5px; justify-content: center;"
-      // document
-      //   .getElementById("uploadedimage")
-      //   .setAttribute("src", result.info.secure_url);
-      //console.log(result.info.secure_url)
+      
       const descriptionTextArea = document.getElementById("url");
-      const existingDescription = descriptionTextArea.value;
-      const newDescription =
-        existingDescription + "\n" + result.info.secure_url;
+      const newDescription = result.info.secure_url;
       descriptionTextArea.value = newDescription;
+
+      document.getElementById('article-url').value = "";
     }
   }
 );
@@ -79,15 +76,12 @@ const myWidget2 = cloudinary.createUploadWidget(
       thumbnail_img.style = "display: inline-block"
 
       document.querySelector(".thmb_holder2").style = "display: flex; margin-top:5px; justify-content: center;"
-      // document
-      //   .getElementById("uploadedimage")
-      //   .setAttribute("src", result.info.secure_url);
-      //console.log(result.info.secure_url)
+      
       const descriptionTextArea = document.getElementById("videoUrl");
-      const existingDescription = descriptionTextArea.value;
-      const newDescription =
-        existingDescription + "\n" + result.info.secure_url;
+      const newDescription = result.info.secure_url;
       descriptionTextArea.value = newDescription;
+
+      document.getElementById('article-url').value = "";
     }
   }
 );
@@ -145,6 +139,18 @@ document.getElementById("upload_widget2").addEventListener(
               if(event.data.type === 'video') {
                 videoInputFiller(event.data.imageUrl);
               }
+
+              //removing clodinary upload button thumbnail when image from gallery is selected
+              const thumbnail_vid = document.getElementById("thumbnail_vid");
+              thumbnail_vid.src = "";
+              thumbnail_vid.style = "display: none"
+
+
+              const thumbnail_img = document.getElementById("thumbnail_img");
+              thumbnail_img.src = "";
+              thumbnail_img.style = "display: none"
+
+              //-------------------------------------------------
                 // Update the URL input field with the selected image URL
                 document.getElementById('article-url').value = event.data.imageUrl;
             }
@@ -152,3 +158,9 @@ document.getElementById("upload_widget2").addEventListener(
     });
 
 
+//-------------------------------------------------
+
+
+
+    
+    

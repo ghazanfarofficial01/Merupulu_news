@@ -26,7 +26,7 @@ advRouter.post("/admin/createAdv", isAuth, async (req, res) => {
 //to fetch advertisement for mobile application
 advRouter.get("/api/getAdvertisements", async (req, res) => {
   try {
-    const advs = await Adv.find({});
+    const advs = await Adv.find({}).sort({publishedAt:-1}).exec();
 
     res.status(200).json(advs);
   } catch (e) {

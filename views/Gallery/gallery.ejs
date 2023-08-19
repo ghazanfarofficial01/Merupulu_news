@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Include Cloudinary widget library -->
+    <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
+    <title>Gallery</title>
+    <link rel="stylesheet" href="../dashboard.css" />
+  </head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* .gallery-title {
+      text-align: center;
+      font-weight: bold;
+      padding: 20px;
+      font-size: 24px;
+    } */
+
+    /* ... (existing CSS rules) ... */
+
+    .gallery-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease;
+      cursor: pointer;
+      background-color: #f9f9f9;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .gallery-media {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    /* Additional styling for the form */
+    #media-upload-form {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-bottom: 15px;
+    }
+
+    .cloudinary-button,
+    .submit-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #3498db;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        
+        
+    }
+
+ #cloudinary-upload-button{
+    font: -webkit-mini-control;
+ }
+    .submit-button {
+        
+        align-self: center;
+        background-color: #2ecc71;
+    }
+
+  </style>
+  <body>
+    <header>
+        <h1>Merupulu News App Admin Dashboard</h1>
+    </header>
+    <div class="container">
+    <%- include('../partials/sidebar')%>
+    <div class="main-content">
+    <h2 class="gallery-title">Gallery</h2>
+
+    <form id="media-upload-form" action="/admin/newGalleryResource" method="POST">
+      
+     <div>
+        <label for="resource-name" class="form-label">Resource Name:</label>
+        <input type="text" id="resource-name" class="form-input" placeholder="Enter resource name" name="resourceName">
+     </div>
+     <div style="display: inline;">
+        <label for="media-upload-button" class="form-label">Upload Media:</label>
+        <button class="cloudinary-button" id="cloudinary-upload-button">Select Media</button>
+        <input style="display: none;" type="url" id="img-resource-url" class="form-input"name="url">
+        <input style="display: none;" type="url" id="vid-resource-url" class="form-input"name="videoUrl">
+    </div>
+    
+        <button type="submit" class="submit-button">Upload</button>
+    </form>
+
+    <div class="gallery-container">
+
+     
+
+
+      <% for (let article of articles) { %>
+      
+      <% if(article.url != "") { %>
+      <div class="gallery-item">
+        <img
+          src="<%= article.url %>"
+          alt="Image"
+          class="gallery-media"
+          onclick="selectImage('<%= article.url %>','image')"
+        />
+      </div>
+      <% } %> 
+      
+      <% if(article.videoUrl != "") { %>
+      <div class="gallery-item">
+        <video
+          class="gallery-media"
+          data-url="<%= article.videoUrl %>"
+          data-type="video"
+          controls
+          onclick="selectImage('<%= article.videoUrl %>','video')"
+        >
+          <source src="<%= article.videoUrl %>" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+
+      <% } %> 
+      <% } %>
+    </div>
+</div>
+</div>
+    
+
+
+
+<script>
+    const myWidget3 = cloudinary.createUploadWidget(
+  {
+    cloudName: "dydvdhjky",
+    uploadPreset: "fii6w2nc",
+    multiple: false,  //restrict upload to a single file
+    folder: "gallery_resources", //upload files to the specified folder
+    clientAllowedFormats: ["images","jpg","png","mp4","mov","wmv","flv","avi","WebM","mkv"], //restrict uploading to image files only
+    
+  },
+  (error, result) => {
+    if (!error && result && result.event === "success") {
+      //console.log("Done! Here is the image info: ", result.info);
+     console.log(result.info);
+
+     
+      if(result.info.resource_type === 'image'){
+       const ImgResourceUrl = document.getElementById("img-resource-url");
+       const newDescription = result.info.secure_url;
+       ImgResourceUrl.value = newDescription;
+      }
+      else{
+        const VidResourceUrl = document.getElementById("vid-resource-url");
+        const newDescription = result.info.secure_url;
+        VidResourceUrl.value = newDescription;
+      }
+     
+    }
+  }
+);
+
+document.getElementById("cloudinary-upload-button").addEventListener(
+  "click",
+  function (e) {
+    e.preventDefault();
+    myWidget3.open();
+  },
+  false
+);
+</script>
+  </body>
+</html>

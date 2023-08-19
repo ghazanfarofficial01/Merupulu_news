@@ -1,21 +1,23 @@
 const mongoose = require('mongoose')
-const eventSchema = mongoose.Schema({
-    eventTitle:{
+const GalleryUploadSchema = mongoose.Schema({
+    name:{
         type: String,
         default:"",
         trim: true,
     },
     
-    eventUrl:{
+    url:{
         type: String,
         default:"",
         trim: true,
+        
     },
-    eventResourceUrl:{
+   
+    videoUrl:{
         type: String,
         default:"",
         trim: true,
-        required:true
+       
     },
 
     publishedAt:{
@@ -24,5 +26,5 @@ const eventSchema = mongoose.Schema({
     }
 })
 
-const Events = mongoose.model("Events", eventSchema);
-module.exports = Events;
+const Gallery = mongoose.model("Gallery", GalleryUploadSchema);
+module.exports = Gallery;

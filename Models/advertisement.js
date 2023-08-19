@@ -16,6 +16,11 @@ const advSchema = mongoose.Schema({
         default:"",
         trim: true,
         required:true
+    },
+
+    publishedAt:{
+      type: Date,
+      default: Date.now(),
     }
 
     
