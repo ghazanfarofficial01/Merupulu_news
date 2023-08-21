@@ -33,7 +33,7 @@ const myWidget = cloudinary.createUploadWidget(
       const descriptionTextArea = document.getElementById("url");
       const newDescription = result.info.secure_url;
       descriptionTextArea.value = newDescription;
-
+        //console.log(descriptionTextArea.value);
       document.getElementById('article-url').value = "";
     }
   }
@@ -98,7 +98,7 @@ document.getElementById("upload_widget2").addEventListener(
 //making two functions for filling the hidden input field of image url or video url and also showing thumbnail in select resource from gallery section
  const imageInputFiller = function (url) {
       //const thumbnail = result.info.thumbnail_url;
-      // console.log("reached......");
+      //console.log("reached......");
       // const thumbnail_img = document.getElementById("thumbnail_gallery");
       // thumbnail_img.src = url;
       // thumbnail_img.style = "display: inline-block  width:10px; height: 20px;"
@@ -108,6 +108,7 @@ document.getElementById("upload_widget2").addEventListener(
       
       const newDescription = url;
       descriptionTextArea.value = newDescription;
+      //console.log(descriptionTextArea.value);
  }
 
  const videoInputFiller = function(url) {
@@ -131,7 +132,7 @@ document.getElementById("upload_widget2").addEventListener(
         // Handle communication between popup and parent window
         window.addEventListener('message', function (event) {
             if (event.data && event.data.imageUrl) {
-              //console.log(event.data.type)
+              //console.log(event.data.imageUrl);
               if(event.data.type === 'image') {
                 imageInputFiller(event.data.imageUrl);
               }

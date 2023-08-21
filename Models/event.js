@@ -20,7 +20,7 @@ const eventSchema = mongoose.Schema({
 
     publishedAt:{
       type: Date,
-      default: Date.now(),
+      default: Date.now,
     }
 })
 

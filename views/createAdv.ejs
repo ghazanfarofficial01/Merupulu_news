@@ -89,7 +89,7 @@
           },
           function (error, result) {
             if (!error && result && result.event === "success") {
-              console.log("Image uploaded successfully:", result.info);
+              //console.log("Image uploaded successfully:", result.info);
               const advImage = document.getElementById("adv-image");
               advImage.value = result.info.secure_url;
               //for thumbnail

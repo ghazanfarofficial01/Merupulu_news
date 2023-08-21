@@ -85,7 +85,7 @@
           },
           function (error, result) {
             if (!error && result && result.event === "success") {
-              console.log("Image uploaded successfully:", result.info);
+              //console.log("Image uploaded successfully:", result.info);
               const eventImage = document.getElementById("event-image");
               eventImage.value = result.info.secure_url;
               //for thumbnail
@@ -97,7 +97,7 @@
               document.querySelector(".thmb_holder").style =
                 "display: flex; margin-top:5px; justify-content: center;";
             } else {
-              console.error("Error uploading image:", error);
+              //console.error("Error uploading image:", error);
             }
           }
         );
