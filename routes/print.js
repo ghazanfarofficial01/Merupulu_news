@@ -29,11 +29,11 @@ try {
   //To reflect CSS used for screens instead of print
    await page.emulateMediaType('screen');
    const height = await page.evaluate(() => document.documentElement.offsetHeight);
-  await page.pdf({ path: filePath, printBackground: true, preferCSSPageSize:false, height:height,margin: { top: '100px', right: '50px', bottom: '100px', left: '50px' },
+  const pdf = await page.pdf({ path: filePath, printBackground: true, preferCSSPageSize:false, height:height,margin: { top: '100px', right: '50px', bottom: '100px', left: '50px' },
 });
   await browser.close();
 
-  res.download(filePath);
+  res.send(pdf);
 } catch (e) {
     res.status(500).json({error: e.message});
 }
