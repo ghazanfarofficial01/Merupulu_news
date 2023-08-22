@@ -18,7 +18,7 @@ printRouter.get('/articlePrintLayout', async(req, res)=>{
 printRouter.get('/admin/print', async(req, res) => {
 
 try {
- const url = "http://localhost:3000/articlePrintLayout";
+ const url = "https://merupulu-news.onrender.com/articlePrintLayout";
  const filePath = path.resolve(__dirname, '/articles.pdf');
 
   const browser = await puppeteer.launch({headless: "new",defaultViewport: null});
