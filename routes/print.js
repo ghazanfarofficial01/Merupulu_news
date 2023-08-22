@@ -21,7 +21,7 @@ try {
  const url = "http://localhost:3000/articlePrintLayout";
  const filePath = path.resolve(__dirname, '/articles.pdf');
 
-  const browser = await puppeteer.launch({headless: true,defaultViewport: null});
+  const browser = await puppeteer.launch({headless: "new",defaultViewport: null});
   const page = await browser.newPage();
 
   await page.goto(url, {waitUntil: 'networkidle0' });

@@ -12,6 +12,17 @@ eventRouter.get('/admin/createEvent', isAuth, async (req, res) => {
       res.status(500).json({error: e.message})
     }
    })
+
+  //  all event page
+
+  eventRouter.get('/admin/allEvents', isAuth, async (req, res) => {
+    try{
+      const events = await Event.find({}).sort({publishedAt:-1}).exec();
+      res.render("allEvents",{events});
+    } catch(e){
+      res.status(500).json({error: e.message})
+    }
+   })
  
 // adding new event   
 eventRouter.post('/admin/createEvent', isAuth, async (req, res) =>{
