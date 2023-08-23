@@ -16,7 +16,7 @@ printRouter.get('/articlePrintLayout', async(req, res)=>{
 })
 
 printRouter.get('/admin/print', async(req, res) => {
-
+   res.contentType("application/pdf")
 try {
  const url = "https://merupulu-news.onrender.com/articlePrintLayout";
  const filePath = path.resolve(__dirname, '/articles.pdf');
@@ -29,7 +29,7 @@ try {
   //To reflect CSS used for screens instead of print
    await page.emulateMediaType('screen');
    const height = await page.evaluate(() => document.documentElement.offsetHeight);
-  const pdf = await page.pdf({ path: filePath, printBackground: true, preferCSSPageSize:false, height:height,margin: { top: '100px', right: '50px', bottom: '100px', left: '50px' },
+  const pdf = await page.pdf({ printBackground: true, preferCSSPageSize:false, height:height,margin: { top: '100px', right: '50px', bottom: '100px', left: '50px' },
 });
   await browser.close();
 
