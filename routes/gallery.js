@@ -45,4 +45,18 @@ galleryRouter.post("/admin/newGalleryResource", isAuth, async (req, res) => {
     res.status(500).json({ error: e.message });
   }
 });
+
+//deleting a gallery item
+galleryRouter.delete('/admin/galleryItem/:id',isAuth, async (req,res) =>{
+  try{
+    const {id} = req.params;
+    //console.log(id);
+     await GalleryResource.findByIdAndDelete(id);
+     await Article.findByIdAndDelete(id);
+     res.redirect('/admin/gallery');
+
+  } catch(e){
+    res.status(500).json({error: e.message})
+  }
+})
 module.exports = galleryRouter;

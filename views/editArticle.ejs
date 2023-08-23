@@ -40,16 +40,23 @@
               />
             </div>
 
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label for="article-description">Short Description:</label>
               <textarea id="article-description" rows="3" required name="desc">
 <%= article.description %></textarea
               >
-            </div>
+            </div> -->
 
             <div class="form-group">
               <label for="article-content">Content:</label>
-              <textarea id="article-content" rows="6" required name="content">
+              <textarea
+                id="article-content"
+                rows="6"
+                maxlength="427"
+                
+                required
+                name="content"
+              >
 <%= article.content %></textarea
               >
             </div>
@@ -79,8 +86,12 @@
             <div class="form-group">
               <label for="article-category">Category:</label>
               <select id="article-category" required name="category">
-                <% const finalSentence = article.category.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());%>
-                <option value="<%= article.category %>"><%= finalSentence %></option>
+                <% const finalSentence =
+                article.category.replace(/(^\w{1})|(\s+\w{1})/g, letter =>
+                letter.toUpperCase());%>
+                <option value="<%= article.category %>">
+                  <%= finalSentence %>
+                </option>
                 <option value="telangana">Telangana</option>
                 <option value="andhra pradesh">Andhra Pradesh</option>
                 <option value="national">National</option>
@@ -103,12 +114,22 @@
             <!-- from gallery input -->
             <div class="form-group">
               <label for="article-url">Gallery resource url</label>
-              <input type="text" id="article-url" placeholder="It will be auto filled when you select image/video form gallery">
-              <button type="button" class="btn-select-image btn-upload-image" id="select-from-gallery">Select Image from Gallery</button>
-              <div class="thmb_holder0" style="display: none; ">
+              <input
+                type="text"
+                id="article-url"
+                placeholder="It will be auto filled when you select image/video form gallery"
+              />
+              <button
+                type="button"
+                class="btn-select-image btn-upload-image"
+                id="select-from-gallery"
+              >
+                Select Image from Gallery
+              </button>
+              <div class="thmb_holder0" style="display: none">
                 <img id="thumbnail_gallery" style="display: none" />
               </div>
-          </div>
+            </div>
             <diV>
               <button type="button" class="btn-upload-image" id="upload_widget">
                 Upload Image

@@ -8,7 +8,7 @@ newsRouter.get("/admin/newNews", isAuth, (req, res) => {
 });
 newsRouter.post("/admin/newNews",isAuth, async (req, res) => {
   try {
-    const { title, url, videoUrl ,category, content = "",source="", desc, author = "" , isBreaking = false } = req.body;
+    const { title, url, videoUrl ,category, content = "",source="", desc = "", author = "" , isBreaking = false } = req.body;
    
     let news = new News({
       isBreaking,

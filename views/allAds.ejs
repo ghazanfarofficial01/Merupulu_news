@@ -78,35 +78,23 @@
         <div class="main-content">
             <h2>Events</h2>
             <div class="gallery">
-                <% for (let event of events) { %>
-                   <% type = event.eventResourceUrl.substring(event.eventResourceUrl.length -4,event.eventResourceUrl.length) %>
-                   <% title = event.eventtitle != '' ? event.eventTitle : "No title" %>
-                    <% if( type != '.mp4') { %>
+                <% for (let adv of advs) { %>
+                   
+                   <% title = adv.advtitle != '' ? adv.eventTitle : "No title" %>
+                    
                 <div class="media-card">   
-                    <img src="<%= event.eventResourceUrl %>" alt="Image 1" class="media-image">
+                    <img src="<%= adv.advResourceUrl %>" alt="Image 1" class="media-image">
                     <div class="media-content">
                         <h3 class="media-name"><%= title %></h3>
-                        <form method="POST" action="/admin/event/<%= event._id%>?_method=DELETE">
+                        <form method="POST" action="/admin/adv/<%= adv._id%>?_method=DELETE">
                         <button class="delete-button">Delete</button>
                     </form>
                     </div>
                 </div>
                 <% } %>
-                     <% if(type == '.mp4') { %>
-                        <div class="media-card">
-                            <video class="media-image" controls>
-                                <source src="<%= event.eventResourceUrl %>" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                            <div class="media-content">
-                                <h3 class="media-name"><%= title %></h3>
-                                <form method="POST" action="/admin/event/<%= event._id%>?_method=DELETE">
-                                    <button class="delete-button">Delete</button>
-                                </form>
-                            </div>
-                        </div>
-                <% } %> 
-                <% } %>
+                     
+                
+                
                 
         </div>
     </div>

@@ -98,6 +98,26 @@
         background-color: #2ecc71;
     }
 
+
+    .delete-button {
+        background-color: #e74c3c;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        opacity: 1;
+        font-size: xx-small;
+        transition: opacity 0.3s ease;
+    }
+
+    .gallery-item:hover .delete-button {
+        opacity: 1;
+    }
+
   </style>
   <body>
     <header>
@@ -139,6 +159,10 @@
           class="gallery-media"
           onclick="selectImage('<%= article.url %>','image')"
         />
+    <form method="POST" action="/admin/galleryItem/<%= article._id%>?_method=DELETE">
+        <button class="delete-button" >Delete</button>
+      </form>
+
       </div>
       <% } %> 
       
@@ -154,6 +178,11 @@
           <source src="<%= article.videoUrl %>" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
+
+        <form method="POST" action="/admin/galleryItem/<%= article._id%>?_method=DELETE">
+          <button class="delete-button" >Delete</button>
+        </form>
+
       </div>
 
       <% } %> 

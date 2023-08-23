@@ -37,6 +37,18 @@ eventRouter.post('/admin/createEvent', isAuth, async (req, res) =>{
     }
 })
 
+//deleting an event
+eventRouter.delete('/admin/event/:id',isAuth, async (req,res) =>{
+  try{
+    const {id} = req.params;
+    //console.log(id);
+     await Event.findByIdAndDelete(id);
+     res.redirect('/admin/allEvents');
+
+  } catch(e){
+    res.status(500).json({error: e.message})
+  }
+})
 //TO FETCH ALL EVENTS FOR MOBILE APPLICATION
 eventRouter.get('/api/getEvents',async (req, res) => {
     try{
