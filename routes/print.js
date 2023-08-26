@@ -39,7 +39,8 @@ printRouter.get('/admin/print', async(req, res) => {
     //To reflect CSS used for screens instead of print
      await page.emulateMediaType('screen');
      const height = await page.evaluate(() => document.documentElement.offsetHeight);
-    const pdf = await page.pdf({ printBackground: true, preferCSSPageSize:false, height:height,margin: { top: '100px', right: '50px', bottom: '100px', left: '50px' },
+    //const pdf = await page.pdf({ printBackground: true, preferCSSPageSize:false, height:height,margin: { top: '100px', right: '50px', bottom: '100px', left: '50px' },
+    const pdf = await page.screenshot({ printBackground: true, preferCSSPageSize:false, height:height,margin: { top: '100px', right: '50px', bottom: '100px', left: '50px' },
   });
     await browser.close();
   
