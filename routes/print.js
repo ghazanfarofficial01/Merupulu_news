@@ -24,9 +24,6 @@ printRouter.get('/admin/print', async(req, res) => {
 
     const browser = await puppeteer.launch({headless: "new",defaultViewport: null});
     const page = await browser.newPage();
-  
-    await page.goto(url, {waitUntil: 'networkidle0' });
-    
     await page.addStyleTag({
       content: `
       @font-face {
@@ -35,6 +32,9 @@ printRouter.get('/admin/print', async(req, res) => {
  }
       `
     });
+    await page.goto(url, {waitUntil: 'networkidle0' });
+    
+    
 
     //To reflect CSS used for screens instead of print
      await page.emulateMediaType('screen');
