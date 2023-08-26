@@ -20,12 +20,22 @@ printRouter.get('/admin/print', async(req, res) => {
   try {
    const url = "https://merupulu-news.onrender.com/articlePrintLayout";
    const filePath = path.resolve(__dirname, '/articles.pdf');
-  
+   
+
     const browser = await puppeteer.launch({headless: "new",defaultViewport: null});
     const page = await browser.newPage();
   
     await page.goto(url, {waitUntil: 'networkidle0' });
-  
+    
+    await page.addStyleTag({
+      content: `
+      @font-face {
+        font-family: 'TeluguFont';
+         src: url('https://fonts.googleapis.com/css2?family=Noto+Serif+Telugu:wght@200;300&display=swap') format('truetype');
+ }
+      `
+    });
+
     //To reflect CSS used for screens instead of print
      await page.emulateMediaType('screen');
      const height = await page.evaluate(() => document.documentElement.offsetHeight);
