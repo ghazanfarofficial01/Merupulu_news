@@ -4,7 +4,7 @@ const path = require('path');
 const isAuth = require('../middlewares/isAuth')
 const News = require("../Models/articles")
 const puppeteer = require('puppeteer');
-
+const chromium = require('chrome-aws-lambda');
 
 printRouter.get('/articlePrintLayout', async(req, res)=>{
     try {
@@ -24,14 +24,10 @@ printRouter.get('/admin/print', async(req, res) => {
 
     const browser = await puppeteer.launch({headless: "new",defaultViewport: null});
     const page = await browser.newPage();
-    await page.addStyleTag({
-      content: `
-      @font-face {
-        font-family: 'TeluguFont';
-         src: url('https://fonts.googleapis.com/css2?family=Noto+Serif+Telugu:wght@200;300&display=swap') format('truetype');
- }
-      `
-    });
+    await chromium.font('/var/task/fonts/NotoSerifTC-Light.otf');
+await chromium.font('/var/task/fonts/NotoSerifTC-Medium.otf');
+await chromium.font('/var/task/fonts/NotoSerifTC-Regular.otf');
+
     await page.goto(url, {waitUntil: 'networkidle0' });
     
     
@@ -39,8 +35,7 @@ printRouter.get('/admin/print', async(req, res) => {
     //To reflect CSS used for screens instead of print
      await page.emulateMediaType('screen');
      const height = await page.evaluate(() => document.documentElement.offsetHeight);
-    //const pdf = await page.pdf({ printBackground: true, preferCSSPageSize:false, height:height,margin: { top: '100px', right: '50px', bottom: '100px', left: '50px' },
-    const pdf = await page.screenshot({ printBackground: true, preferCSSPageSize:false, height:height,margin: { top: '100px', right: '50px', bottom: '100px', left: '50px' },
+     const pdf = await page.pdf({ printBackground: true, preferCSSPageSize:false, height:height,margin: { top: '100px', right: '50px', bottom: '100px', left: '50px' },
   });
     await browser.close();
   
