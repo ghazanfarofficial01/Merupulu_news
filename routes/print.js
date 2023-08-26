@@ -4,7 +4,7 @@ const path = require('path');
 const isAuth = require('../middlewares/isAuth')
 const News = require("../Models/articles")
 const puppeteer = require('puppeteer');
-const chromium = require('chrome-aws-lambda');
+//const chromium = require('chrome-aws-lambda');
 
 printRouter.get('/articlePrintLayout', async(req, res)=>{
     try {
@@ -24,9 +24,7 @@ printRouter.get('/admin/print', async(req, res) => {
 
     const browser = await puppeteer.launch({headless: "new",defaultViewport: null});
     const page = await browser.newPage();
-    await chromium.font('/var/task/fonts/NotoSerifTC-Light.otf');
-await chromium.font('/var/task/fonts/NotoSerifTC-Medium.otf');
-await chromium.font('/var/task/fonts/NotoSerifTC-Regular.otf');
+    
 
     await page.goto(url, {waitUntil: 'networkidle0' });
     
