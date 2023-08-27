@@ -100,7 +100,7 @@ authRouter.post("/api/signin", async (req, res) => {
 
 
   //for admin signin in the mobile app
-  authRouter.post("/admin/app/signin", async (req, res) => {
+  authRouter.get("/admin/app/signin", async (req, res) => {
     try {
       const { email, password } = req.query;
   
