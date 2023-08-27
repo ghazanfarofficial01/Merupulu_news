@@ -98,4 +98,40 @@ authRouter.post("/api/signin", async (req, res) => {
     }
   });
 
+
+  //for admin signin in the mobile app
+  authRouter.post("/admin/app/signin", async (req, res) => {
+    try {
+      const { email, password } = req.query;
+  
+      const user = await User.findOne({ email });
+      if (!user) {
+        req.session.error = "Invalid Credentials";
+        return res
+          .status(400)
+          .send("User with this email does not exist!" );
+      }
+      
+      if (!(user.userType==="owner" || user.userType==="admin")) {
+        req.session.error = "Invalid Credentials";
+        return res
+          .status(400)
+          .send("Not authorised" );
+      }
+
+      const isMatch = await bcryptjs.compare(password, user.password);
+      if (!isMatch) {
+        req.session.error = "Invalid Credentials";
+        return res.status(400).json({ msg: "Incorrect password." });
+      }
+  
+      const token = jwt.sign({ id: user._id }, process.env.jwt_secret);
+      req.session.token = token;
+      res.redirect('/admin/dashboard');
+      //res.json({ token, ...user._doc }); 
+    } catch (e) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
 module.exports = authRouter
