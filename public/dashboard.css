@@ -21,6 +21,8 @@ header {
     height: 100vh;
     background-color: #f1f1f1;
     padding: 20px;
+    min-width: min-content;
+
 }
 
 .sidebar ul {
