@@ -6,7 +6,7 @@ const isAuth = require("../middlewares/isAuth")
 newsRouter.get("/admin/newNews", isAuth, (req, res) => {
   res.render("newArticle");
 });
-newsRouter.post("/admin/newNews",isAuth, async (req, res) => {
+newsRouter.post("/admin/newNews", async (req, res) => {
   try {
     const { title, url, videoUrl ,category, content = "",source="", desc = "", author = "" , isBreaking = false } = req.body;
    
