@@ -1,5 +1,6 @@
 const express = require('express');
 const session = require('express-session');
+const flash = require('express-flash');
 const methodOverride = require('method-override');
 const MongoDBStore = require("connect-mongodb-session")(session);
 if (process.env.NODE_ENV !== "production") {
@@ -28,7 +29,9 @@ const store = new MongoDBStore({
     })
   );
   //<--------------------------------------->
+  app.use(flash());
 
+  
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))
 //routes imports
@@ -40,6 +43,7 @@ const eventRouter = require('./routes/event');
 const advRouter = require('./routes/adv');
 const galleryRouter = require('./routes/gallery');
 const printRouter = require('./routes/print');
+const reporterRouter = require('./routes/reporter');
 //middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -54,6 +58,7 @@ app.use(eventRouter)
 app.use(advRouter)
 app.use(galleryRouter)
 app.use(printRouter)
+app.use(reporterRouter)
 //db connection
 mongoose.connect(DB).then(()=>{
     console.log('connection successful');
