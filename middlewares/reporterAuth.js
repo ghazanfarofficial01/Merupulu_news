@@ -1,7 +1,16 @@
 const jwt = require("jsonwebtoken");
 module.exports = (req, res, next) => {
     try {
-      const token = req.session.token;
+      const tokenSession = req.session.token;
+      const tokenApp = req.header('token');
+      let token = null;
+      if(tokenApp) {
+        token = tokenApp;
+      }
+      else{
+        token = tokenSession;
+      }
+
       if (!token)
         return res.status(401).redirect('/reporter/signin');
   
