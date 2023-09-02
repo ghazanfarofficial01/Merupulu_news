@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MERUPULU NEWS</title>
+    <title>MERUPU NEWS</title>
     <link rel="stylesheet" href="../dashboard.css">
 </head>
 <body>
     <header>
-        <h1>Merupulu News App Admin Dashboard</h1>
+        <h1>Merupu News App Admin Dashboard</h1>
         <!-- Add any navigation or user information here if needed -->
     </header>
 
@@ -41,8 +41,8 @@
                             <td><%= title %></td>
                             <td><%= article.author %></td>
                             <td><%= date %></td>
-                            <td><%= article.url === "" ? '❌' : '✔️' %></td>
-                            <td><%= article.videoUrl === "" ? '❌' : '✔️' %></td>
+                            <td style="cursor: pointer;" onclick="window.location.href='<%= article.url %>'"><%= article.url === "" ? '❌' : '✔️' %></td>
+                            <td style="cursor: pointer;" onclick="window.location.href='<%= article.videoUrl %>'" ><%= article.videoUrl === "" ? '❌' : '✔️' %></td>
                             <td>
                                 
                                 <a href="/admin/article/<%= article._id%>/edit"><button class="btn-edit">Edit</button></a>

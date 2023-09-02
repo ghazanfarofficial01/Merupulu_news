@@ -4,6 +4,7 @@ module.exports = (req, res, next) => {
       const tokenSession = req.session.token;
       const tokenApp = req.header('token');
       let token = null;
+      
       if(tokenApp) {
         token = tokenApp;
       }
