@@ -48,14 +48,14 @@ printRouter.get('/admin/print', async(req, res) => {
 printRouter.get('/.well-known/assetlinks.json',(req, res) =>{
   try{
     let outJson = [{
-      "relation": ["delegate_permission/common.handle_all_urls"],
-      "target": {
-        "namespace": "android_app",
-        "package_name": "com.androtech.merupunews.prod",
-        "sha256_cert_fingerprints":
-        ["F7:58:18:4E:50:D0:1B:BD:4A:C8:11:B9:AF:FA:27:FA:67:39:A4:40:1C:D6:1D:26:A2:6C:EA:F2:42:FD:0D:95"]
-      }
-    }];
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.androtech.merupunews.prod",
+    "sha256_cert_fingerprints":
+    ["0A:C2:BC:1D:26:B4:86:C3:E4:15:B8:8C:2B:0B:F2:E4:0D:B9:7A:1B:F6:0E:BE:71:23:8E:43:CF:20:52:13:52"]
+  }
+}];
     res.json(outJson);
   }catch(e){
     res.status(500).json({error: e.message});
