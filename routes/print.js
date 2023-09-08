@@ -62,5 +62,12 @@ printRouter.get('/.well-known/assetlinks.json',(req, res) =>{
   }
 })
 
+printRouter.get('/openApp',(req, res) =>{
+  try{
+    res.redirect('https://play.google.com/store/apps/details?id=com.androtech.merupunews.prod');
+  }catch(e){
+    res.status(500).json({error: e.message});
+  }
+})
 
 module.exports = printRouter;
