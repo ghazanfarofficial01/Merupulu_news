@@ -50,6 +50,16 @@ app.use(express.json());
 app.use(express.static('public'))
 app.use(methodOverride('_method'));
 
+//middleware to not not allow back button/telling browser not to save cache
+app.use((req, res, next) => {
+  // Prevent caching for all routes
+  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+  res.header('Expires', '-1');
+  res.header('Pragma', 'no-cache');
+  next();
+});
+
+
 app.use(newsRouter);
 app.use(authRouter);
 app.use(dashRouter);
