@@ -43,4 +43,24 @@ printRouter.get('/admin/print', async(req, res) => {
   }
 })
 
+
+//for redirecting to app link provided to app developer
+printRouter.get('/.well-known/assetlinks.json',(req, res) =>{
+  try{
+    let outJson = [{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.androtech.merupunews.prod",
+        "sha256_cert_fingerprints":
+        ["F7:58:18:4E:50:D0:1B:BD:4A:C8:11:B9:AF:FA:27:FA:67:39:A4:40:1C:D6:1D:26:A2:6C:EA:F2:42:FD:0D:95"]
+      }
+    }];
+    res.json(outJson);
+  }catch(e){
+    res.status(500).json({error: e.message});
+  }
+})
+
+
 module.exports = printRouter;
