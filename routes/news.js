@@ -34,12 +34,12 @@ newsRouter.post("/admin/newNews", async (req, res) => {
 newsRouter.get("/api/news", async(req, res) => {
   try{  
     if(!req.query.category){
-       const news = await News.find({published:true}).sort({updatedAt:-1}).exec();
+       const news = await News.find({published:true}).sort({publishedAt:-1}).exec();
       //console.log(news)
       res.status(200).json(news)
   }
   else{
-    const news = await News.find({$and:[{published:true},{category: req.query.category}]}).sort({updatedAt:-1}).exec();
+    const news = await News.find({$and:[{published:true},{category: req.query.category}]}).sort({publishedAt:-1}).exec();
       res.status(200).json(news)
   }
   }catch(e){
@@ -50,7 +50,7 @@ newsRouter.get("/api/news", async(req, res) => {
 //getting breaking news
 newsRouter.get("/api/news/isBreaking", async(req, res) => {
   try{  
-     const news = await News.find({$and:[{published:true},{isBreaking: true}]}).sort({updatedAt:-1}).exec();
+     const news = await News.find({$and:[{published:true},{isBreaking: true}]}).sort({publishedAt:-1}).exec();
       res.status(200).json(news)
   
   }catch(e){
