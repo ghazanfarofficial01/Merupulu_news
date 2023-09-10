@@ -151,7 +151,7 @@ dashRouter.get('/admin/allAdmins', isAuth, async (req, res) => {
     try{
       const {id} = req.params;
        await News.findByIdAndDelete(id);
-       res.redirect('/admin/dashboard');
+       res.redirect('/admin/allArticles');
   
     } catch(e){
       res.status(500).json({error: e.message})
