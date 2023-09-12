@@ -49,7 +49,7 @@ newsRouter.get("/api/news", async(req, res) => {
       const query = { published: true};
   
       const result = await News.paginate(query, options);
-      res.status(200).json(result.docs);
+      res.status(200).json(result);
   
       
   }
