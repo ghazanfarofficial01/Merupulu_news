@@ -12,7 +12,7 @@ dashRouter.get('/admin/dashboard',isAuth, async(req, res) => {
     try{
       const articleCount = await News.countDocuments({})
       const userCount = await User.countDocuments({userType: 'normalUser'})
-      const articles = await News.find({published:true}).limit(10).sort({publishedAt:-1}).exec();
+      const articles = await News.find({published:true}).limit(10).sort({updatedAt:-1}).exec();
 
       //console.log(articles);
     res.render("dashboard",{articleCount,userCount,articles})
@@ -151,7 +151,7 @@ dashRouter.get('/admin/allAdmins', isAuth, async (req, res) => {
     try{
       const {id} = req.params;
        await News.findByIdAndDelete(id);
-       res.redirect('/admin/dashboard');
+       res.redirect('/admin/allArticles');
   
     } catch(e){
       res.status(500).json({error: e.message})
@@ -198,7 +198,8 @@ dashRouter.get('/admin/allAdmins', isAuth, async (req, res) => {
   dashRouter.get("/logout",(req, res) => {
     req.session.destroy((err) => {
       if (err) throw err;
-      res.redirect("/");
+      //res.redirect("/");
+      res.header('Cache-Control', 'no-store').redirect('/');
     })
   })
   module.exports = dashRouter;

@@ -32,15 +32,44 @@ newsRouter.post("/admin/newNews", async (req, res) => {
 
 //to fetch news
 newsRouter.get("/api/news", async(req, res) => {
-  try{  
+  const page = parseInt(req.query.page) || 1;
+  try{ 
+    
     if(!req.query.category){
-       const news = await News.find({published:true}).sort({publishedAt:-1}).exec();
+       //const news = await News.find({published:true}).sort({publishedAt:-1}).exec();
       //console.log(news)
-      res.status(200).json(news)
+      //res.status(200).json(news)
+      
+      const options = {
+        page,
+        limit:5,
+        sort: { publishedAt: -1 }, // Sort in descending order of publishedAt
+      };
+  
+      const query = { published: true};
+  
+      const result = await News.paginate(query, options);
+      res.status(200).json(result.docs);
+  
+      
   }
   else{
-    const news = await News.find({$and:[{published:true},{category: req.query.category}]}).sort({publishedAt:-1}).exec();
-      res.status(200).json(news)
+    //const news = await News.find({$and:[{published:true},{category: req.query.category}]}).sort({publishedAt:-1}).exec();
+    //res.status(200).json(news)
+
+    const options = {
+      page,
+      limit:20,
+      sort: { publishedAt: -1 }, // Sort in descending order of publishedAt
+    };
+
+    const query = { 
+      published: true,
+      category:req.query.category
+    };
+
+    const result = await News.paginate(query, options);
+    res.status(200).json(result);
   }
   }catch(e){
     res.status(500).json({ error: e.message });

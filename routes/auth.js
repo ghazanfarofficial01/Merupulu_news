@@ -76,7 +76,7 @@ authRouter.post("/api/signin", async (req, res) => {
           .send("User with this email does not exist!" );
       }
       
-      if (!(user.userType==="owner" || user.userType==="admin")) {
+      if (!(user.userType==="owner")) {
         req.session.error = "Invalid Credentials";
         return res
           .status(400)
