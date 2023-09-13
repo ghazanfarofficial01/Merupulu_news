@@ -1,4 +1,5 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate-v2');
 const newsSchema = mongoose.Schema({
     isBreaking:{
        type:Boolean,
@@ -61,6 +62,6 @@ const newsSchema = mongoose.Schema({
 
 },
 {timestamps:true})
-
+newsSchema.plugin(mongoosePaginate);
 const NewsArticles = mongoose.model("NewsArticles",newsSchema);
 module.exports = NewsArticles;
