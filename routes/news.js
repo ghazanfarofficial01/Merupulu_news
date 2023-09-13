@@ -39,7 +39,7 @@ newsRouter.get("/api/news", async(req, res) => {
       res.status(200).json(news)
   }
   else{
-    const news = await News.find({$and:[{published:true},{category: req.query.category}]}).sort({publishedAt:-1}).lean().exec();
+    const news = await News.find({$and:[{published:true},{category: req.query.category}]}).sort({publishedAt:-1}).exec();
       res.status(200).json(news)
   }
   }catch(e){
