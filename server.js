@@ -62,7 +62,9 @@ app.use((req, res, next) => {
 });
 
 // Compress all HTTP responses
-app.use(compression());
+app.use(compression({
+  level:9
+}));
 
 app.use(newsRouter);
 app.use(authRouter);
