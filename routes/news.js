@@ -60,7 +60,7 @@ newsRouter.get("/api/news", async(req, res) => {
 
     const options = {
       page,
-      limit:20,
+      limit:15,
       sort: { publishedAt: -1 }, // Sort in descending order of publishedAt
     };
 
@@ -79,12 +79,25 @@ newsRouter.get("/api/news", async(req, res) => {
 
 //getting breaking news
 newsRouter.get("/api/news/isBreaking", async(req, res) => {
-  
+  const page = parseInt(req.query.page) || 1;
   
   try{  
      
-     const news = await News.find({$and:[{published:true},{isBreaking: true}]}).sort({publishedAt:-1}).exec();
-      res.status(200).json(news)
+     //const news = await News.find({$and:[{published:true},{isBreaking: true}]}).sort({publishedAt:-1}).exec();
+      //res.status(200).json(news)
+      const options = {
+        page,
+        limit:15,
+        sort: { publishedAt: -1 }, // Sort in descending order of publishedAt
+      };
+  
+      const query = { 
+        published: true,
+        isBreaking: true,
+      };
+  
+      const result = await News.paginate(query, options);
+      res.status(200).json(result);
       
   }catch(e){
     res.status(500).json({ error: e.message });
