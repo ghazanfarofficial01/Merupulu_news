@@ -60,6 +60,8 @@ app.use((req, res, next) => {
   next();
 });
 
+// Compress all HTTP responses
+app.use(compression());
 
 app.use(newsRouter);
 app.use(authRouter);
