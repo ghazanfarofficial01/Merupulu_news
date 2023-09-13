@@ -1,4 +1,5 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate-v2');
 const advSchema = mongoose.Schema({
     advTitle:{
         type: String,
@@ -26,6 +27,6 @@ const advSchema = mongoose.Schema({
     
 
 })
-
+advSchema.plugin(mongoosePaginate);
 const Adv = mongoose.model("Adv", advSchema);
 module.exports = Adv;

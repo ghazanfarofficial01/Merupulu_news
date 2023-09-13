@@ -1,4 +1,5 @@
 const express = require('express');
+const compression = require('compression');
 const session = require('express-session');
 const flash = require('express-flash');
 const methodOverride = require('method-override');
@@ -33,6 +34,7 @@ const store = new MongoDBStore({
   app.use(flash());
 
   
+  
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))
 //routes imports
@@ -59,7 +61,8 @@ app.use((req, res, next) => {
   next();
 });
 
-
+// Compress all HTTP responses
+app.use(compression());
 
 app.use(newsRouter);
 app.use(authRouter);
