@@ -52,8 +52,21 @@ eventRouter.delete('/admin/event/:id',isAuth, async (req,res) =>{
 //TO FETCH ALL EVENTS FOR MOBILE APPLICATION
 eventRouter.get('/api/getEvents',async (req, res) => {
     try{
-      const events = await Event.find({}).sort({publishedAt:-1}).exec();
-      res.status(200).json(events)
+      const page = parseInt(req.query.page);
+      if(!page){
+        const events = await Event.find({}).sort({publishedAt:-1}).exec();
+        res.status(200).json(events)
+      }
+      else{
+        const options = {
+          page,
+          limit: 15,
+          sort: { publishedAt: -1 }, // Sort in descending order of publishedAt
+        };
+
+        const result = await Event.paginate({},options);
+        res.status(200).json(result);
+      }
     } catch(e){
       res.status(500).json({error: e.message})
     }
