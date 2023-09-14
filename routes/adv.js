@@ -53,9 +53,21 @@ advRouter.delete('/admin/adv/:id',isAuth, async (req,res) =>{
 //to fetch advertisement for mobile application
 advRouter.get("/api/getAdvertisements", async (req, res) => {
   try {
-    const advs = await Adv.find({}).sort({publishedAt:-1}).exec();
+    const page = parseInt(req.query.page);
 
-    res.status(200).json(advs);
+    if (!page) {
+      const advs = await Adv.find({}).sort({ publishedAt: -1 }).exec();
+      res.status(200).json(advs);
+    } else {
+      const options = {
+        page,
+        limit: 15,
+        sort: { publishedAt: -1 }, // Sort in descending order of publishedAt
+      };
+
+      const result = await Adv.paginate({}, options);
+      res.status(200).json(result);
+    }
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
