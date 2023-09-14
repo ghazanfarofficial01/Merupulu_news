@@ -19,6 +19,12 @@ const newsSchema = mongoose.Schema({
       trim: true,
     },
     
+    district:{
+        type: String,
+        default: "",
+        trim: true,
+      },
+    
     url:{
        type: String,
        trim: true,

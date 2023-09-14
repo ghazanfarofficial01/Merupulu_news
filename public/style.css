@@ -159,3 +159,8 @@ button:hover {
 .adv-page #adv-title, #adv-url {
   width: calc(100% - 23px); /* Adjust width based on button widths */
 }
+
+
+#article-district option{
+  font-weight: 600;
+}

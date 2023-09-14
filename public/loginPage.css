@@ -167,3 +167,23 @@ nav > img {
   color: black;
   font-size: 30px;
 }
+
+
+/* Define a CSS animation called "blinking" */
+@keyframes blinking {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Apply the "blinking" animation to the "blink" class */
+.blink {
+  animation: blinking 1s infinite; /* Infinite animation */
+  transition: animation-play-state 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* Pause the animation on hover */
+.blink:hover {
+  animation-play-state: paused;
+  
+}
