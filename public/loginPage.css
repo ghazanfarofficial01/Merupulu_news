@@ -178,7 +178,7 @@ nav > img {
 
 /* Apply the "blinking" animation to the "blink" class */
 .blink {
-  animation: blinking 1s infinite; /* Infinite animation */
+  animation: blinking 1.5s infinite; /* Infinite animation */
   transition: animation-play-state 0.3s ease; /* Smooth transition for hover effect */
 }
 
