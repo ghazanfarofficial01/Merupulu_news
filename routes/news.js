@@ -138,7 +138,7 @@ newsRouter.get("/api/news/isBreaking", async (req, res) => {
 newsRouter.get('/api/news/district', async (req, res) => {
   try {
     // Extract the list of districts from the query parameters
-    const districts = req.body.districts;
+    const districts = req.query.districts;
 
     // Ensure districts parameter is present and not empty
     if (!districts || districts.length === 0) {
