@@ -118,5 +118,50 @@ newsRouter.get("/api/news/isBreaking", async(req, res) => {
   }
 });
 
+//to fetch news using district field
+newsRouter.get('/api/news/district', async (req, res) => {
+  try {
+    const page = parseInt(req.query.page);
+
+    // Extract the list of districts from the query parameters
+    const districts = req.query.districts;
+
+    // Ensure districts parameter is present and not empty
+    if (!districts || districts.length === 0) {
+      return res.status(400).json({ error: 'Districts parameter is required.' });
+    }
+
+    // Convert the districts parameter to an array (if it's a comma-separated string)
+    const districtList = Array.isArray(districts) ? districts : districts.split(',');
+
+    // Use Mongoose to query the database based on the district(s)
+    if(!page){
+    //const news = await News.find({$and:[ {district: { $in: districtList }} ,{published: true}]}).sort({publishedAt:-1}).exec();;
+    const news = await News.find({ district: { $in: districtList }, published: true });
+
+    // Return the retrieved news articles
+    res.status(200).json(news);
+    }else{
+      const options = {
+        page,
+        limit: 15,
+        sort: { publishedAt: -1 }, // Sort in descending order of publishedAt
+      };
+  
+      const query = {
+        published: true,
+        district: { $in: districtList },
+      };
+  
+      const result = await News.paginate(query, options);
+      res.status(200).json(result);
+    }
+  } catch (e) {
+    // Handle errors
+    
+    console.error(e.message);
+    res.status(500).json({ error: e.message  });
+  }
+});
 
 module.exports = newsRouter;
