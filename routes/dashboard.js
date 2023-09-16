@@ -20,7 +20,7 @@ dashRouter.get('/admin/dashboard',isAuth, async(req, res) => {
       res.status(500).json({error: e.message})
     }
   })
-  //unpushed articles render route
+  //unpublished articles render route
    dashRouter.get('/admin/unpublished',isAuth,async (req,res)=>{
     try{
       const articles = await News.find({published:false}).sort({publishedAt:-1}).exec();
@@ -41,6 +41,15 @@ dashRouter.get('/admin/dashboard',isAuth, async(req, res) => {
     res.redirect("/admin/unpublished");
   })
 
+  //unpublishing published articles
+  dashRouter.put('/admin/article/unpublish/:id',isAuth,async(req,res)=>{
+    const id = req.params.id;
+    const article = await News.findById(id);
+    
+    const updatedArticle = await News.findByIdAndUpdate(id, { published:false});
+    //console.log(updatedArticle);
+    res.redirect("/admin/unpublished");
+  })
 
   //all article page render route
   dashRouter.get('/admin/allArticles', isAuth, async (req, res) => {
