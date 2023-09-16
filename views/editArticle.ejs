@@ -115,10 +115,8 @@
             <div class="form-group">
               <label for="article-district">District:</label>
               <select id="article-district" required name="district">
-                <% const district =
-                article.district.replace(/(^\w{1})|(\s+\w{1})/g, letter =>
-                letter.toUpperCase());%>
-                <option value="<%= article.district %>"  selected><%= district %></option>
+                
+                <option value="<%= article.district %>"  selected><%= article.district %></option>
                 <option value="hyderabad">Hyderabad - హైదరాబాద్</option>
                 <option value="ranga reddy">Ranga Reddy - రంగారెడ్డి</option>
                 <option value="vikarabad">Vikarabad - వికారాబాద్‌</option>
