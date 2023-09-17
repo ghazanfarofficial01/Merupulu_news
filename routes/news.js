@@ -164,4 +164,15 @@ newsRouter.get('/api/news/district', async (req, res) => {
   }
 });
 
+newsRouter.get('/api/news/:id',async (req,res) => {
+  try{
+    console.log("reached /:id")
+    const id = req.params.id;
+    let news = await News.findById(id);
+    res.status(200).json(news);
+  }catch(e){
+    res.status(500).json({ error: e.message });
+  }
+})
+
 module.exports = newsRouter;
