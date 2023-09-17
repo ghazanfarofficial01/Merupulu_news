@@ -166,7 +166,6 @@ newsRouter.get('/api/news/district', async (req, res) => {
 
 
 //pushing this code
-=======
 newsRouter.get('/api/news/:id',async (req,res) => {
   try{
     console.log("reached /:id")
