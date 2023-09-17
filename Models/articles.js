@@ -63,7 +63,12 @@ const newsSchema = mongoose.Schema({
     published:{
         type:Boolean,
         default: false,
-    }
+    },
+    
+    reporter: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user',
+      },
 
 
 },
