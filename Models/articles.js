@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const user = require('./user');
 const mongoosePaginate = require('mongoose-paginate-v2');
 const newsSchema = mongoose.Schema({
     isBreaking:{
@@ -67,7 +68,10 @@ const newsSchema = mongoose.Schema({
         default: false,
     },
 
-
+    reporter: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user',
+      },
 
 },
 {timestamps:true})

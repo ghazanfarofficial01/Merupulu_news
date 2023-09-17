@@ -19,7 +19,7 @@ galleryRouter.get("/admin/gallery", isAuth, async (req, res) => {
   try {
     const articles = await Article.find({}).sort({publishedAt:-1}).exec()
     const gallery = await GalleryResource.find({}).sort({publishedAt:-1}).exec()
-    articles.push(...gallery)
+    //articles.push(...gallery)
     
     res.render("Gallery/gallery",{articles: articles,galleryUploads: gallery});
   } catch (e) {

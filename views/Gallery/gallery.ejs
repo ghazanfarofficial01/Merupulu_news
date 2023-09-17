@@ -159,9 +159,9 @@
           class="gallery-media"
           onclick="selectImage('<%= article.url %>','image')"
         />
-    <form method="POST" action="/admin/galleryItem/<%= article._id%>?_method=DELETE">
+    <!-- <form method="POST" action="/admin/galleryItem/<%= article._id%>?_method=DELETE">
         <button class="delete-button" >Delete</button>
-      </form>
+      </form> -->
 
       </div>
       <% } %> 
@@ -179,14 +179,55 @@
           Your browser does not support the video tag.
         </video>
 
-        <form method="POST" action="/admin/galleryItem/<%= article._id%>?_method=DELETE">
+        <!-- <form method="POST" action="/admin/galleryItem/<%= article._id%>?_method=DELETE">
           <button class="delete-button" >Delete</button>
-        </form>
+        </form> -->
 
       </div>
 
       <% } %> 
       <% } %>
+
+
+      <!-- for gallery items -->
+      <% for (let item of galleryUploads) { %>
+      
+        <% if(item.url != "") { %>
+        <div class="gallery-item">
+          <img
+            src="<%= article.url %>"
+            alt="Image"
+            class="gallery-media"
+            onclick="selectImage('<%= item.url %>','image')"
+          />
+      <form method="POST" action="/admin/galleryItem/<%= item._id%>?_method=DELETE">
+          <button class="delete-button" >Delete</button>
+        </form>
+  
+        </div>
+        <% } %> 
+        
+        <% if(item.videoUrl != "") { %>
+        <div class="gallery-item">
+          <video
+            class="gallery-media"
+            data-url="<%= article.videoUrl %>"
+            data-type="video"
+            controls
+            onclick="selectImage('<%= item.videoUrl %>','video')"
+          >
+            <source src="<%= article.videoUrl %>" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+  
+          <form method="POST" action="/admin/galleryItem/<%= item._id%>?_method=DELETE">
+            <button class="delete-button" >Delete</button>
+          </form>
+  
+        </div>
+  
+        <% } %> 
+        <% } %>
     </div>
 </div>
 </div>

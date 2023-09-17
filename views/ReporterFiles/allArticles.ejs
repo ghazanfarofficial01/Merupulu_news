@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MERUPU NEWS</title>
+    <link rel="stylesheet" href="../dashboard.css">
+</head>
+<body>
+    <header>
+        <h1>Merupu News App Admin Dashboard</h1>
+        <!-- Add any navigation or user information here if needed -->
+    </header>
+
+    <div class="container">
+        <!-- sidebar -->
+        <div class="sidebar">
+            <!-- Sidebar content, links, or navigation -->
+            <ul>
+                <li><a href="/reporter/allArticles">Your Articles</a></li>
+               
+              </ul>
+            <ul>
+              <li><a href="/reporter/logout">Logout</a></li>
+             
+            </ul>
+          </div>
+
+        <div class="main-content">
+            <!-- All Articles Table -->
+            <h2>All Articles</h2>
+            <div class="articles-table">
+                <!-- Table to display all articles -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Reporter</th>
+                            <th>Date</th>
+                            <th>Image</th>
+                            <th>Video</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Populate table rows with all articles from the database -->
+                        <% for (let article of articles) { %>
+                        <tr>
+                            <% date = article.publishedAt.toString().substring(0,16) %>
+                            <% title = article.title.toString().substring(0,50) %>
+                            <td><%= title %></td>
+                            <td><%= article.author %></td>
+                            <td><%= date %></td>
+                            <td style="cursor: pointer;" onclick="window.location.href='<%= article.url %>'"><%= article.url === "" ? '❌' : '✔️' %></td>
+                            <td style="cursor: pointer;" onclick="window.location.href='<%= article.videoUrl %>'" ><%= article.videoUrl === "" ? '❌' : '✔️' %></td>
+                            
+                        </tr>
+                        <% } %>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -16,7 +16,7 @@ reporterRouter.get("/reporter/newNews", isAuth, (req, res) => {
 reporterRouter.post("/reporter/newNews",isAuth, async (req, res) => {
   try {
     const { title, url, videoUrl ,category,district, content = "",source="", desc = "", author = "" , isBreaking = false } = req.body;
-   
+    //console.log(req.user);
     let news = new News({
       isBreaking,
       title,
@@ -28,6 +28,7 @@ reporterRouter.post("/reporter/newNews",isAuth, async (req, res) => {
       source,
       description: desc,
       author,
+      reporter:req.user,
     });
      
     news = await news.save();
@@ -87,4 +88,16 @@ reporterRouter.post("/reporter/signin", async (req, res) => {
     })
   })
 
+  //to get the articles posted by that particular reporter
+  reporterRouter.get('/reporter/allArticles', isAuth, async (req, res) => {
+    try{
+      let id = "6506d13951a4f6246f9541a1";
+      const articles = await News.find({published:true,reporter:req.user}).sort({publishedAt:-1}).exec();
+      //console.log(articles)
+      
+      res.render("ReporterFiles/allArticles",{articles});
+    } catch(e){
+      res.status(500).json({error: e.message})
+    }
+   })
 module.exports = reporterRouter;

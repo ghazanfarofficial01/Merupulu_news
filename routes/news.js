@@ -37,7 +37,7 @@ newsRouter.post("/admin/newNews", async (req, res) => {
 
       news = await news.save();
 
-    res.redirect("/admin/dashboard");
+    res.redirect("/admin/unpublished");
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
@@ -186,7 +186,7 @@ newsRouter.get('/api/news/:id',async (req,res) => {
     const id = req.params.id;
     //console.log(id);
     let news = await News.findById(id);
-    news = [news];
+    
     res.status(200).json(news);
   }catch(e){
     res.status(500).json({ error: e.message });

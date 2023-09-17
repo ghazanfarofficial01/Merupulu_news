@@ -48,7 +48,7 @@ dashRouter.get('/admin/dashboard',isAuth, async(req, res) => {
     
     const updatedArticle = await News.findByIdAndUpdate(id, { published:false});
     //console.log(updatedArticle);
-    res.redirect("/admin/unpublished");
+    res.redirect("/admin/allArticles");
   })
 
   //all article page render route
@@ -198,7 +198,7 @@ dashRouter.get('/admin/allAdmins', isAuth, async (req, res) => {
     console.log(req.body.url);
     const updatedArticle = await News.findByIdAndUpdate(id, { ...req.body });
     //console.log(updatedArticle);
-    res.redirect("/admin/dashboard");
+    res.redirect("/admin/allArticles");
   })
 
 
