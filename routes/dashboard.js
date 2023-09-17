@@ -20,7 +20,7 @@ dashRouter.get('/admin/dashboard',isAuth, async(req, res) => {
       res.status(500).json({error: e.message})
     }
   })
-  //unpushed articles render route
+  //unpublished articles render route
    dashRouter.get('/admin/unpublished',isAuth,async (req,res)=>{
     try{
       const articles = await News.find({published:false}).sort({publishedAt:-1}).exec();
