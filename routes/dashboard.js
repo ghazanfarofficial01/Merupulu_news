@@ -198,7 +198,7 @@ dashRouter.get('/admin/allAdmins', isAuth, async (req, res) => {
     console.log(req.body.url);
     const updatedArticle = await News.findByIdAndUpdate(id, { ...req.body });
     //console.log(updatedArticle);
-    res.redirect("/admin/dashboard");
+    res.redirect("/admin/allArticles");
   })
 
 
