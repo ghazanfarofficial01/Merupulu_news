@@ -19,7 +19,7 @@ galleryRouter.get("/admin/gallery", isAuth, async (req, res) => {
   try {
     const articles = await Article.find({}).sort({publishedAt:-1}).exec()
     const gallery = await GalleryResource.find({}).sort({publishedAt:-1}).exec()
-    articles.push(...gallery)
+    //articles.push(...gallery)
     
     res.render("Gallery/gallery",{articles: articles,galleryUploads: gallery});
   } catch (e) {
@@ -52,7 +52,7 @@ galleryRouter.delete('/admin/galleryItem/:id',isAuth, async (req,res) =>{
     const {id} = req.params;
     //console.log(id);
      await GalleryResource.findByIdAndDelete(id);
-     await Article.findByIdAndDelete(id);
+     //await Article.findByIdAndDelete(id);
      res.redirect('/admin/gallery');
 
   } catch(e){
