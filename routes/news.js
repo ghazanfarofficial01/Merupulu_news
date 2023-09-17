@@ -25,7 +25,7 @@ newsRouter.post("/admin/newNews", async (req, res) => {
      
     news = await news.save();
 
-    res.redirect("/admin/dashboard");
+    res.redirect("/admin/unpublished");
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
