@@ -164,6 +164,9 @@ newsRouter.get('/api/news/district', async (req, res) => {
   }
 });
 
+
+//pushing this code
+=======
 newsRouter.get('/api/news/:id',async (req,res) => {
   try{
     console.log("reached /:id")
@@ -174,5 +177,6 @@ newsRouter.get('/api/news/:id',async (req,res) => {
     res.status(500).json({ error: e.message });
   }
 })
+
 
 module.exports = newsRouter;
