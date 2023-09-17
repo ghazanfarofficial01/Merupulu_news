@@ -28,6 +28,7 @@ reporterRouter.post("/reporter/newNews",isAuth, async (req, res) => {
       source,
       description: desc,
       author,
+      reporter:req.user,
     });
      
     news = await news.save();
