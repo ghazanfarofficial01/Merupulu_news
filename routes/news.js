@@ -165,6 +165,7 @@ newsRouter.get('/api/news/district', async (req, res) => {
 });
 
 
+
 //api to fetch news by id
 newsRouter.get('/api/news/:id',async (req,res) => {
   try{
