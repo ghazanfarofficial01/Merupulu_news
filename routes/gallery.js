@@ -30,7 +30,7 @@ galleryRouter.get("/admin/gallery", isAuth, async (req, res) => {
 galleryRouter.post("/admin/newGalleryResource", isAuth, async (req, res) => {
   try {
     const { name = "", url = "", videoUrl =  ""} = req.body;
-    console.log(req.body);
+    //console.log(req.body);
     if(url === "" && videoUrl === ""){
       throw new Error("select video/image")
     }
