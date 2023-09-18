@@ -15,7 +15,7 @@ reporterRouter.get("/reporter/newNews", isAuth, (req, res) => {
 
 reporterRouter.post("/reporter/newNews",isAuth, async (req, res) => {
   try {
-    const { title, url, videoUrl ,category,district, content = "",source="", desc = "", author = "" , isBreaking = false } = req.body;
+    const { title, url, videoUrl ,category,district, content = "",source="", desc = "", author = "" , isBreaking = true } = req.body;
    
     let news = new News({
       isBreaking,
