@@ -36,9 +36,9 @@
                     <tbody>
                         <!-- Populate table rows with all articles from the database -->
                         <% for (let article of articles) { %>
-                            <% if(article.district) { %>
+                          <!--  <% if(article.district) { %>
                                 <% district = article.district %>
-                              <% } %>
+                              <% } %> -->
                               
                         <tr>
                             <% date = article.publishedAt.toString().substring(0,16) %>
@@ -46,7 +46,7 @@
                             <td><%= title %></td>
                             <td><%= article.author %></td>
                             <td><%= date %></td>
-                            <td style="color: rgb(231, 154, 0);"><%= district %></td>
+                            <td style="color: rgb(231, 154, 0);"><%= article.district %></td>
                             <td style="cursor: pointer;" onclick="window.location.href='<%= article.url %>'"><%= article.url === "" ? '❌' : '✔️' %></td>
                             <td style="cursor: pointer;" onclick="window.location.href='<%= article.videoUrl %>'" ><%= article.videoUrl === "" ? '❌' : '✔️' %></td>
                             <td>
