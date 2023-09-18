@@ -20,10 +20,11 @@ dashRouter.get('/admin/dashboard',isAuth, async(req, res) => {
       res.status(500).json({error: e.message})
     }
   })
+
   //unpublished articles render route
-   dashRouter.get('/admin/unpublished',isAuth,async (req,res)=>{
+  dashRouter.get('/admin/unpublished',isAuth,async (req,res)=>{
     try{
-      const articles = await News.find({published:false}).sort({publishedAt:-1}).exec();
+      const articles = await News.find({published:false,$or:[{district: { $exists: false },district:{$eq:""}}]}).sort({publishedAt:-1}).exec();
       //console.log(articles)
       res.render("allUnpublished",{articles});
     } catch(e){
@@ -31,6 +32,18 @@ dashRouter.get('/admin/dashboard',isAuth, async(req, res) => {
     }
    })
    
+   //unpublished district articles render route
+   dashRouter.get('/admin/district/unpublished',isAuth,async (req,res)=>{
+    try{
+      const articles = await News.find({published:false,district:{$ne: ""}}).sort({publishedAt:-1}).exec();
+      //console.log(articles)
+      res.render("allUnpublishedDistrict",{articles});
+    } catch(e){
+      res.status(500).json({error: e.message})
+    }
+   })
+   
+
    //publishing unpublished articles
    dashRouter.put('/admin/article/publish/:id',isAuth,async(req,res)=>{
     const id = req.params.id;
