@@ -12,7 +12,7 @@ dashRouter.get('/admin/dashboard',isAuth, async(req, res) => {
     try{
       const articleCount = await News.countDocuments({})
       const userCount = await User.countDocuments({userType: 'normalUser'})
-      const articles = await News.find({published:true}).limit(10).sort({publishedAt:-1}).exec();
+      const articles = await News.find({published:true}).limit(10).sort({updatedAt:-1}).exec();
 
       //console.log(articles);
     res.render("dashboard",{articleCount,userCount,articles})

@@ -9,6 +9,7 @@ if (process.env.NODE_ENV !== "production") {
 }
 const path = require('path');
 const mongoose = require('mongoose');
+//const mongoosePaginate = require('mongoose-paginate-v2');
 const app = express();
 const port = process.env.PORT || 3000;
 const DB = process.env.mongo_url
@@ -33,6 +34,7 @@ const store = new MongoDBStore({
   app.use(flash());
 
   
+  
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))
 //routes imports
@@ -50,6 +52,19 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'))
 app.use(methodOverride('_method'));
+//middleware to not not allow back button/telling browser not to save cache
+app.use((req, res, next) => {
+  // Prevent caching for all routes
+  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+  res.header('Expires', '-1');
+  res.header('Pragma', 'no-cache');
+  next();
+});
+
+// Compress all HTTP responses
+app.use(compression({
+  level:9
+}));
 
 //middleware to not not allow back button/telling browser not to save cache
 app.use((req, res, next) => {

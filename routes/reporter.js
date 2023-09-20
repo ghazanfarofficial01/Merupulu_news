@@ -11,6 +11,7 @@ const User = require("../Models/user");
 reporterRouter.get("/reporter/newNews", isAuth, (req, res) => {
     const successMessage = req.flash('success');
   res.render("ReporterFiles/newArticlebyReporter",{successMessage});
+  res.render("ReporterFiles/newArticlebyReporter",{successMessage});
 });
 
 reporterRouter.post("/reporter/newNews",isAuth, async (req, res) => {
@@ -22,12 +23,14 @@ reporterRouter.post("/reporter/newNews",isAuth, async (req, res) => {
       title,
       category,
       district,
+      district,
       url,
       videoUrl,
       content,
       source,
       description: desc,
       author,
+      reporter:req.user,
       reporter:req.user,
     });
      

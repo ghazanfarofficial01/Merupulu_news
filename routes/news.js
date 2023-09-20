@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const newsRouter = express.Router();
 const News = require("../Models/articles");
-const isAuth = require("../middlewares/isAuth")
+const isAuth = require("../middlewares/isAuth");
 newsRouter.get("/admin/newNews", isAuth, (req, res) => {
   res.render("newArticle");
 });
@@ -15,6 +15,7 @@ newsRouter.post("/admin/newNews", async (req, res) => {
       title,
       category,
       district,
+      district,
       url,
       videoUrl,
       content,
@@ -22,8 +23,8 @@ newsRouter.post("/admin/newNews", async (req, res) => {
       description: desc,
       author,
     });
-     
-    news = await news.save();
+
+      news = await news.save();
 
     res.redirect("/admin/unpublished");
   } catch (e) {

@@ -51,6 +51,7 @@ eventRouter.delete('/admin/event/:id',isAuth, async (req,res) =>{
 })
 //TO FETCH ALL EVENTS FOR MOBILE APPLICATION
 eventRouter.get('/api/getEvents',async (req, res) => {
+  const page = parseInt(req.query.page);
     try{
       const page = parseInt(req.query.page);
       if(!page){

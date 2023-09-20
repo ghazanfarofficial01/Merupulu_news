@@ -6,6 +6,7 @@ const News = require("../Models/articles")
 const puppeteer = require('puppeteer');
 //const chromium = require('chrome-aws-lambda');
 
+
 printRouter.get('/articlePrintLayout', async(req, res)=>{
     try {
      const articles = await News.find({published:true}).sort({publishedAt:-1}).exec();

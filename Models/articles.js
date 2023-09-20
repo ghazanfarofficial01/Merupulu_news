@@ -60,6 +60,8 @@ const newsSchema = mongoose.Schema({
         type: Date,
         default: Date.now
     },
+
+     
     published:{
         type:Boolean,
         default: false,

@@ -18,10 +18,12 @@ header {
 
 .sidebar {
     width: 20%;
-    height: 100vh;
-    background-color: #f1f1f1;
+    height: 112vh;
+    /* background-color: #f1f1f1; */
     padding: 20px;
     min-width: min-content;
+    background-color: #222; /* Dark background color */
+    
 
 }
 
@@ -37,13 +39,16 @@ header {
 
 .sidebar a {
     text-decoration: none;
-    color: #333;
+    /* color: #333; */
+    color: #fff; /* Set link text color to white */
+    transition: background-color 0.2s ease 0s;
     padding: 5px 10px;
     display: block;
 }
 
 .sidebar a:hover {
-    background-color: #ddd;
+    /* background-color: #ddd; */
+    background-color: #444; /* Darker background color on hover */
 }
 
 .main-content {
@@ -113,6 +118,7 @@ input {
 .btn-add-admin:hover {
     background-color: #45a049;
 }
+
 
 
 /* ------------------------- */
