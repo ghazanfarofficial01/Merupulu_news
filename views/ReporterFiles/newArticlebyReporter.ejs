@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MERUPU NEWS</title>
+    
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body class="post-article-page">
+    <header>
+      <h1>Merupu News App Reporter Dashboard</h1>
+      <!-- Add any navigation or user information here if needed -->
+    </header>
+
+    <div class="container">
+      <!-- sidebar -->
+      <div class="sidebar">
+        <!-- Sidebar content, links, or navigation -->
+        <ul>
+          <li><a href="/reporter/allArticles">My Articles</a></li>
+         </ul>
+        <ul>
+          <li><a href="/reporter/logout">Logout</a></li>
+         </ul>
+      </div>
+      
+
+      <div class="main-content">
+        <!-- Post Article Form -->
+        <h2>Post Article</h2>
+
+        <div id="flash-message">
+          <% if (successMessage) { %>
+            
+            <div class="success-message" style="background-color: aquamarine;"><%= successMessage %></div>
+            
+    <script>
+      // Automatically hide the flash message after 2 seconds
+      setTimeout(function () {
+        var flashMessage = document.querySelector('.success-message');
+        if (flashMessage) {
+          flashMessage.style.display = 'none';
+        }
+      }, 3000); // 2000 milliseconds (2 seconds)
+    </script>
+          <% } %>
+        </div>
+
+        <div class="post-article-form">
+          <form action="/reporter/newNews" method="POST">
+           <!-- <div class="breaking-news-checkbox">
+              <label for="breaking-news">Breaking News</label>
+              <input
+                type="checkbox"
+                id="breaking-news"
+                name="isBreaking"
+                value="true"
+                checked
+              />
+            </div> -->
+            <div class="form-group">
+              <label for="article-title">Title:</label>
+              <input type="text" name="title" id="article-title" required />
+            </div>
+
+            <!-- <div class="form-group">
+              <label for="article-description">Short Description:</label>
+              <textarea
+                id="article-description"
+                rows="3"
+                required
+                name="desc"
+              ></textarea>
+            </div> -->
+
+            <div class="form-group">
+              <label for="article-content">Content:</label>
+              <textarea
+                id="article-content"
+                rows="6"
+                maxlength="470"
+                placeholder="maximum length 470 characters"
+                required
+                name="content"
+              ></textarea>
+            </div>
+
+            <!-- //dummy text area -->
+            <div class="form-group">
+              <label for="article-content" style="width: max-content; background-color: rgb(226, 94, 94);">Dummy Content !!:</label>
+              <textarea
+                id="article-content"
+                rows="3"
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="article-author">Reporter:</label>
+              <input type="text" name="author" id="article-author" required />
+            </div>
+
+            <div class="form-group">
+              <label for="article-source">Place:</label>
+              <input type="text" name="source" id="article-source" required />
+            </div>
+
+            <div class="form-group">
+              <label for="article-category">Category:</label>
+              <select id="article-category" required name="category">
+                <option value="" disabled selected>Select a category</option>
+                <option value="telangana">Telangana</option>
+                <option value="andhra pradesh">Andhra Pradesh</option>
+                <option value="national">National</option>
+                <option value="global">Global</option>
+                <option value="educational">Study/Career</option>
+                <option value="political">Political</option>
+                <option value="cinema">Cinema</option>
+                <option value="business">Business</option>
+                <option value="sports">Sports</option>
+                <option value="crime">Crime</option>
+                <option value="health">Health</option>
+                <option value="lifestyle">Lifestyle</option>
+                <option value="devotional">Devotional</option>
+                <option value="astrology">Astrology</option>
+                <option value="weather">Weather</option>
+
+                <!-- <option value="travel">Travel</option>
+                <option value="science">Science</option>
+                <option value="viral">Viral</option>
+                <option value="art">Art</option>
+                <option value="technology">Technology</option>
+                <option value="india">India</option>
+                <option value="vehicles">Vehicles</option>
+                <option value="entertainment">Entertainment</option>
+                <option value="international">International</option> -->
+                <!-- Add more options as needed -->
+              </select>
+            </div>
+
+              <div class="form-group">
+              <label for="article-district">District:</label>
+              <select id="article-district" name="district">
+               <option value="" disabled selected>Select a District</option>
+                <option value="hyderabad">Hyderabad - హైదరాబాద్</option>
+                <option value="ranga reddy">Ranga Reddy - రంగారెడ్డి</option>
+                <option value="vikarabad">Vikarabad - వికారాబాద్‌</option>
+                <option value="medchal">Medchal - మేడ్చల్‌ మల్కాజిగిరి </option>
+                <option value="adilabad">Adilabad - ఆదిలాబాద్‌</option>
+                <option value="asifabad">Asifabad - కుమురంభీం ఆసిఫాబాద్‌</option>
+                <option value="nirmal">Nirmal - నిర్మల్‌</option>
+                <option value="mancherial">Mancherial - మంచిర్యాల</option>
+                <option value="nizamabad">Nizamabad - నిజామాబాద్‌</option>
+                <option value="kamareddy">Kamareddy కామారెడ్డి</option>
+                <option value="karimnagar">Karimnagar - కరీంనగర్‌</option>
+                <option value="peddapally">Peddapally - పెద్దపల్లి</option>
+                <option value="sircilla">Sircilla - రాజన్న సిరిసిల్ల</option>
+                <option value="jagityal">Jagityal - జగిత్యాల</option>
+                <option value="warangal">Warangal - వరంగల్</option>
+                <option value="hanmakonda">Hanmakonda - హన్మకొండ</option>
+                <option value="janagama">Janagama - జనగామ</option>
+                <option value="mahabubabad">Mahabubabad - మహబూబాబాద్‌</option>
+                <option value="bhupalapalli">Bhupalapalli - జయశంకర్‌ భూపాలపల్లి</option>
+                <option value="mulugu">Mulugu - ములుగు</option>
+                <option value="khammam">Khammam - ఖమ్మం</option>
+                <option value="kothagudem">Kothagudem - భద్రాద్రి కొత్తగూడెం</option>
+                <option value="mahbubnagar">Mahbubnagar - మహబూబ్‌నగర్‌</option>
+                <option value="gadwala">Gadwala - జోగులాంబ గద్వాల</option>
+                <option value="vanaparthi">Vanaparthi - వనపర్తి</option>
+                <option value="nagarkurnool">Nagarkurnool - నాగర్‌కర్నూల్‌</option>
+                <option value="narayanapet">Narayanapet - నారాయణపేట</option>
+                <option value="medak">Medak మెదక్‌</option>
+                <option value="sangareddy">Sangareddy - సంగారెడ్డి</option>
+                <option value="siddipet">Siddipet - సిద్దిపేట</option>
+                <option value="nalgonda">Nalgonda - నల్గొండ</option>
+                <option value="suryapet">Suryapet - సూర్యాపేట</option>
+                <option value="bhuvanagiri">Bhuvanagiri - యాదాద్రి భువనగిరి</option>
+                
+              </select>
+            </div>
+
+
+            <div class="form-group">
+              <label for="article-url">Gallery resource url</label>
+              <input type="text" id="article-url" placeholder="It will be auto filled when you select image/video form gallery">
+              <button type="button" class="btn-select-image btn-upload-image" id="select-from-gallery">Select Image from Gallery</button>
+              <div class="thmb_holder0" style="display: none; ">
+                <img id="thumbnail_gallery" style="display: none" />
+              </div>
+          </div>
+            <diV>
+              <button type="button" class="btn-upload-image" id="upload_widget">
+                Upload Image
+              </button>
+
+              <div class="thmb_holder1" style="display: none">
+                <img id="thumbnail_img" style="display: none" />
+              </div>
+
+              <div>
+                <input
+                  class="hide"
+                  style="display: none"
+                  type="url"
+                  id="url"
+                  name="url"
+                />
+              </div>
+            </diV>
+            <!-- videoupload -->
+            <diV>
+              <button
+                type="button"
+                class="btn-upload-image"
+                id="upload_widget2"
+              >
+                Upload Video
+              </button>
+
+              <div class="thmb_holder2">
+                <img id="thumbnail_vid" style="display: none" />
+              </div>
+
+              <div>
+                <input
+                  style="display: none"
+                  type="url"
+                  id="videoUrl"
+                  name="videoUrl"
+                />
+              </div>
+            </diV>
+
+            <button type="submit" class="btn-post-article">Post Article</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://widget.cloudinary.com/v2.0/global/all.js"
+      type="text/javascript"
+    ></script>
+
+    <script src="../upload_widget.js"></script>
+  </body>
+</html>

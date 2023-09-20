@@ -36,7 +36,7 @@ dashRouter.get('/admin/dashboard',isAuth, async(req, res) => {
    dashRouter.get('/admin/district/unpublished',isAuth,async (req,res)=>{
     try{
       const articles = await News.find({published:false,district:{$ne: ""}}).sort({publishedAt:-1}).exec();
-      //console.log(articles)
+      //console.log(articles[0])
       res.render("allUnpublishedDistrict",{articles});
     } catch(e){
       res.status(500).json({error: e.message})
@@ -51,8 +51,11 @@ dashRouter.get('/admin/dashboard',isAuth, async(req, res) => {
     
     const updatedArticle = await News.findByIdAndUpdate(id, { published:true, publishedAt:Date.now()});
     //console.log(updatedArticle);
-    res.redirect("/admin/unpublished");
-  })
+    if(req.query.source === 'districtNews'){
+      res.redirect("/admin/district/unpublished");
+    }
+    else res.redirect("/admin/unpublished");  
+  })  
 
   //unpublishing published articles
   dashRouter.put('/admin/article/unpublish/:id',isAuth,async(req,res)=>{
@@ -173,7 +176,14 @@ dashRouter.get('/admin/allAdmins', isAuth, async (req, res) => {
     try{
       const {id} = req.params;
        await News.findByIdAndDelete(id);
-       res.redirect('/admin/allArticles');
+
+       if(req.query.source === 'unpublishedDistrictNews') res.redirect("/admin/district/unpublished");
+
+       else if(req.query.source === 'unpublishedNews') res.redirect("/admin/unpublished");
+
+       else if(req.query.source === 'allArticles') res.redirect("/admin/allArticles"); 
+      
+       else res.redirect("/admin/dashboard");
   
     } catch(e){
       res.status(500).json({error: e.message})
@@ -208,7 +218,7 @@ dashRouter.get('/admin/allAdmins', isAuth, async (req, res) => {
       req.body.isBreaking = false;
     }
     //  console.log(article);
-    console.log(req.body.url);
+    //console.log(req.body.url);
     const updatedArticle = await News.findByIdAndUpdate(id, { ...req.body });
     //console.log(updatedArticle);
     res.redirect("/admin/allArticles");
@@ -222,5 +232,6 @@ dashRouter.get('/admin/allAdmins', isAuth, async (req, res) => {
       if (err) throw err;
       res.header('Cache-Control', 'no-store').redirect('/');
     })
-  })
-  module.exports = dashRouter;
+  });
+
+module.exports = dashRouter;

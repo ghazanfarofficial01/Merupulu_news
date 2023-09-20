@@ -17,7 +17,7 @@
         <div class="sidebar">
             <!-- Sidebar content, links, or navigation -->
             <ul>
-                <li><a href="/reporter/allArticles">Your Articles</a></li>
+                <li><a href="/reporter/newNews">Post Articles</a></li>
                
               </ul>
             <ul>
@@ -39,6 +39,7 @@
                             <th>Date</th>
                             <th>Image</th>
                             <th>Video</th>
+                            <th>Status</th>
                             
                         </tr>
                     </thead>
@@ -53,7 +54,7 @@
                             <td><%= date %></td>
                             <td style="cursor: pointer;" onclick="window.location.href='<%= article.url %>'"><%= article.url === "" ? '❌' : '✔️' %></td>
                             <td style="cursor: pointer;" onclick="window.location.href='<%= article.videoUrl %>'" ><%= article.videoUrl === "" ? '❌' : '✔️' %></td>
-                            
+                            <td><p style="height: min-content;width: max-content; background-color: yellow;"><%= article.published == true? 'Published': 'Pending for approval' %></p></td>
                         </tr>
                         <% } %>
                         <!-- Add more rows as needed -->
