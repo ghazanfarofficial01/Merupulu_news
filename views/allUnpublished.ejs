@@ -48,7 +48,7 @@
                                     <button class="btn-delete" style="background-color: aquamarine;">Publish</button>
                                 </form>
                                 <a href="/admin/article/<%= article._id%>/edit"><button class="btn-edit">Edit</button></a>
-                                <form style="display: inline;" method="POST" action="/admin/article/<%= article._id%>?_method=DELETE">
+                                <form style="display: inline;" method="POST" action="/admin/article/<%= article._id%>?source=unpublishedNews&_method=DELETE">
                                     <button class="btn-delete">Delete</button>
                                 </form>
                             </td>

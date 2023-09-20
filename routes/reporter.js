@@ -10,12 +10,12 @@ const User = require("../Models/user");
 
 reporterRouter.get("/reporter/newNews", isAuth, (req, res) => {
     const successMessage = req.flash('success');
-  res.render("newArticlebyReporter",{successMessage});
+  res.render("ReporterFiles/newArticlebyReporter",{successMessage});
 });
 
 reporterRouter.post("/reporter/newNews",isAuth, async (req, res) => {
   try {
-    const { title, url, videoUrl ,category,district, content = "",source="", desc = "", author = "" , isBreaking = false } = req.body;
+    const { title, url, videoUrl ,category,district, content = "",source="", desc = "", author = "" , isBreaking = true } = req.body;
     //console.log(req.user);
     let news = new News({
       isBreaking,
@@ -91,8 +91,7 @@ reporterRouter.post("/reporter/signin", async (req, res) => {
   //to get the articles posted by that particular reporter
   reporterRouter.get('/reporter/allArticles', isAuth, async (req, res) => {
     try{
-      let id = "6506d13951a4f6246f9541a1";
-      const articles = await News.find({published:true,reporter:req.user}).sort({publishedAt:-1}).exec();
+      const articles = await News.find({reporter:req.user}).sort({publishedAt:-1}).exec();
       //console.log(articles)
       
       res.render("ReporterFiles/allArticles",{articles});

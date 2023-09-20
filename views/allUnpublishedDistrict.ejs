@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MERUPU NEWS</title>
-    <link rel="stylesheet" href="../dashboard.css">
+    <link rel="stylesheet" href="/dashboard.css">
 </head>
 <body>
     <header>
@@ -14,26 +14,11 @@
 
     <div class="container">
         <!-- sidebar -->
-        <div class="sidebar">
-            <!-- Sidebar content, links, or navigation -->
-            <ul>
-                <li><a href="/reporter/allArticles">My Articles</a></li>
-               
-              </ul>
-
-              <ul>
-                <li><a href="/reporter/newNews">New Article</a></li>
-              </ul>
-
-            <ul>
-              <li><a href="/reporter/logout">Logout</a></li>
-             
-            </ul>
-          </div>
+        <%- include('./partials/sidebar')%>
 
         <div class="main-content">
             <!-- All Articles Table -->
-            <h2>All Articles</h2>
+            <h2>All Unpublished District Articles</h2>
             <div class="articles-table">
                 <!-- Table to display all articles -->
                 <table>
@@ -42,24 +27,37 @@
                             <th>Title</th>
                             <th>Reporter</th>
                             <th>Date</th>
+                            <th>District</th>
                             <th>Image</th>
                             <th>Video</th>
-                            <th>Status</th>
-                            
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <!-- Populate table rows with all articles from the database -->
                         <% for (let article of articles) { %>
+                            <% if(article.district) { %>
+                                <% district = article.district %>
+                              <% } %>
+                              
                         <tr>
                             <% date = article.publishedAt.toString().substring(0,16) %>
                             <% title = article.title.toString().substring(0,50) %>
                             <td><%= title %></td>
                             <td><%= article.author %></td>
                             <td><%= date %></td>
+                            <td style="color: rgb(231, 154, 0);"><%=district%></td>
                             <td style="cursor: pointer;" onclick="window.location.href='<%= article.url %>'"><%= article.url === "" ? '❌' : '✔️' %></td>
                             <td style="cursor: pointer;" onclick="window.location.href='<%= article.videoUrl %>'" ><%= article.videoUrl === "" ? '❌' : '✔️' %></td>
-                            <td><p style="height: min-content;width: max-content; background-color: yellow;"><%= article.published == true? 'Published': 'Pending for approval' %></p></td>
+                            <td>
+                                <form style="display: inline;" method="POST" action="/admin/article/publish/<%= article._id%>?source=districtNews&_method=PUT">
+                                    <button class="btn-delete" style="background-color: aquamarine;">Publish</button>
+                                </form>
+                                <a href="/admin/article/<%= article._id%>/edit"><button class="btn-edit">Edit</button></a>
+                                <form style="display: inline;" method="POST" action="/admin/article/<%= article._id%>?source=unpublishedDistrictNews&_method=DELETE">
+                                    <button class="btn-delete">Delete</button>
+                                </form>
+                            </td>
                         </tr>
                         <% } %>
                         <!-- Add more rows as needed -->

@@ -23,14 +23,27 @@ dashRouter.get('/admin/dashboard',isAuth, async(req, res) => {
   //unpublished articles render route
    dashRouter.get('/admin/unpublished',isAuth,async (req,res)=>{
     try{
-      const articles = await News.find({published:false}).sort({publishedAt:-1}).exec();
+      const articles = await News.find({published:false,$or:[{district: { $exists: false },district:{$eq:""}}]}).sort({publishedAt:-1}).exec();
       //console.log(articles)
       res.render("allUnpublished",{articles});
     } catch(e){
       res.status(500).json({error: e.message})
     }
    })
+
+   //unpublished district articles render route
+   dashRouter.get('/admin/district/unpublished',isAuth,async (req,res)=>{
+    try{
+      const articles = await News.find({published:false,district:{$ne: ""}}).sort({publishedAt:-1}).exec();
+      //console.log(articles)
+      res.render("allUnpublishedDistrict",{articles});
+    } catch(e){
+      res.status(500).json({error: e.message})
+    }
+   })
    
+
+
    //publishing unpublished articles
    dashRouter.put('/admin/article/publish/:id',isAuth,async(req,res)=>{
     const id = req.params.id;
@@ -38,7 +51,10 @@ dashRouter.get('/admin/dashboard',isAuth, async(req, res) => {
     
     const updatedArticle = await News.findByIdAndUpdate(id, { published:true, publishedAt:Date.now()});
     //console.log(updatedArticle);
-    res.redirect("/admin/unpublished");
+    if(req.query.source === 'districtNews'){
+      res.redirect("/admin/district/unpublished");
+    }
+    else res.redirect("/admin/unpublished");  
   })
 
   //unpublishing published articles
@@ -160,8 +176,15 @@ dashRouter.get('/admin/allAdmins', isAuth, async (req, res) => {
     try{
       const {id} = req.params;
        await News.findByIdAndDelete(id);
-       res.redirect('/admin/allArticles');
-  
+      
+      if(req.query.source === 'unpublishedDistrictNews') res.redirect("/admin/district/unpublished");
+
+      else if(req.query.source === 'unpublishedNews') res.redirect("/admin/unpublished");
+
+      else if(req.query.source === 'allArticles') res.redirect("/admin/allArticles"); 
+      
+      else res.redirect("/admin/dashboard");
+
     } catch(e){
       res.status(500).json({error: e.message})
     }
