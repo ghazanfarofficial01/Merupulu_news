@@ -4,12 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MERUPU NEWS</title>
-    <title>MERUPU NEWS</title>
     <link rel="stylesheet" href="../dashboard.css">
 </head>
 <body>
     <header>
-        <h1>Merupu News App Admin Dashboard</h1>
         <h1>Merupu News App Admin Dashboard</h1>
         <!-- Add any navigation or user information here if needed -->
     </header>
@@ -31,7 +29,6 @@
                             <th>Date</th>
                             <th>Image</th>
                             <th>Video</th>
-                            <th>District</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -46,7 +43,6 @@
                             <td><%= date %></td>
                             <td style="cursor: pointer;" onclick="window.location.href='<%= article.url %>'"><%= article.url === "" ? '❌' : '✔️' %></td>
                             <td style="cursor: pointer;" onclick="window.location.href='<%= article.videoUrl %>'" ><%= article.videoUrl === "" ? '❌' : '✔️' %></td>
-                            <td style="font-size: x-small;"><span style="height: min-content; background-color: yellow;"><%= article.district %></span></td>
                             <td>
                                 
                                 <a href="/admin/article/<%= article._id%>/edit"><button class="btn-edit">Edit</button></a>

@@ -21,14 +21,13 @@ dashRouter.get('/admin/dashboard',isAuth, async(req, res) => {
     }
   })
 
-  //unpublished articles render route
-  dashRouter.get('/admin/unpublished',isAuth,async (req,res)=>{
+  
 
   //unpublished articles render route
   dashRouter.get('/admin/unpublished',isAuth,async (req,res)=>{
     try{
       const articles = await News.find({published:false,$or:[{district: { $exists: false },district:{$eq:""}}]}).sort({publishedAt:-1}).exec();
-      const articles = await News.find({published:false,$or:[{district: { $exists: false },district:{$eq:""}}]}).sort({publishedAt:-1}).exec();
+      
       //console.log(articles)
       res.render("allUnpublished",{articles});
     } catch(e){
@@ -73,16 +72,17 @@ dashRouter.get('/admin/dashboard',isAuth, async(req, res) => {
     else res.redirect("/admin/unpublished");  
   })  
 
-  //unpublishing published articles
-  dashRouter.put('/admin/article/unpublish/:id',isAuth,async(req,res)=>{
+  //publishing unpublished articles
+  dashRouter.put('/admin/article/publish/:id',isAuth,async(req,res)=>{
     const id = req.params.id;
     const article = await News.findById(id);
     
-    const updatedArticle = await News.findByIdAndUpdate(id, { published:false});
+    const updatedArticle = await News.findByIdAndUpdate(id, { published:true, publishedAt:Date.now()});
     //console.log(updatedArticle);
-    res.redirect("/admin/allArticles");
-  })
-    res.redirect("/admin/unpublished");
+    if(req.query.source === 'districtNews'){
+      res.redirect("/admin/district/unpublished");
+    }
+    else res.redirect("/admin/unpublished");  
   })
 
   //unpublishing published articles
@@ -267,5 +267,3 @@ dashRouter.get('/admin/allAdmins', isAuth, async (req, res) => {
 
 module.exports = dashRouter;
 
-  })
-  module.exports = dashRouter;
