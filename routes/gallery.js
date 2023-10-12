@@ -30,7 +30,7 @@ galleryRouter.get("/admin/gallery", isAuth, async (req, res) => {
 galleryRouter.post("/admin/newGalleryResource", isAuth, async (req, res) => {
   try {
     const { name = "", url = "", videoUrl =  ""} = req.body;
-    console.log(req.body);
+    //console.log(req.body);
     if(url === "" && videoUrl === ""){
       throw new Error("select video/image")
     }
@@ -52,7 +52,7 @@ galleryRouter.delete('/admin/galleryItem/:id',isAuth, async (req,res) =>{
     const {id} = req.params;
     //console.log(id);
      await GalleryResource.findByIdAndDelete(id);
-     await Article.findByIdAndDelete(id);
+     //await Article.findByIdAndDelete(id);
      res.redirect('/admin/gallery');
 
   } catch(e){

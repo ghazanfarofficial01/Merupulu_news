@@ -1,5 +1,4 @@
-const mongoose = require('mongoose')
-const user = require('./user');
+const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate-v2');
 const newsSchema = mongoose.Schema({
     isBreaking:{
@@ -19,7 +18,7 @@ const newsSchema = mongoose.Schema({
       default: "",
       trim: true,
     },
-    
+
     district:{
         type: String,
         default: "",
@@ -67,17 +66,15 @@ const newsSchema = mongoose.Schema({
         type:Boolean,
         default: false,
     },
-
+    
     reporter: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user',
       },
 
+
 },
 {timestamps:true})
-
-
 newsSchema.plugin(mongoosePaginate);
-
 const NewsArticles = mongoose.model("NewsArticles",newsSchema);
 module.exports = NewsArticles;

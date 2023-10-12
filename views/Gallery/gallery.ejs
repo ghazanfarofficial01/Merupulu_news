@@ -159,8 +159,9 @@
           class="gallery-media"
           onclick="selectImage('<%= article.url %>','image')"
         />
-    <!-- <form method="POST" action="/admin/galleryItem/<%= article._id%>?_method=DELETE">
+  <!--  <form method="POST" action="/admin/galleryItem/<%= article._id%>?_method=DELETE">
         <button class="delete-button" >Delete</button>
+      </form> -->
       </form> -->
 
       </div>
@@ -179,7 +180,7 @@
           Your browser does not support the video tag.
         </video>
 
-        <!-- <form method="POST" action="/admin/galleryItem/<%= article._id%>?_method=DELETE">
+      <!--  <form method="POST" action="/admin/galleryItem/<%= article._id%>?_method=DELETE">
           <button class="delete-button" >Delete</button>
         </form> -->
 
@@ -189,13 +190,13 @@
       <% } %>
 
 
-      <!-- for gallery items -->
+<!-- -------------------for gallery items----------------------- -->
       <% for (let item of galleryUploads) { %>
       
         <% if(item.url != "") { %>
         <div class="gallery-item">
           <img
-            src="<%= article.url %>"
+            src="<%= item.url %>"
             alt="Image"
             class="gallery-media"
             onclick="selectImage('<%= item.url %>','image')"
@@ -238,8 +239,8 @@
 <script>
     const myWidget3 = cloudinary.createUploadWidget(
   {
-    cloudName: "dydvdhjky",
-    uploadPreset: "fii6w2nc",
+    cloudName: "dr1ykbljn",
+    uploadPreset: "merupu",
     multiple: false,  //restrict upload to a single file
     folder: "gallery_resources", //upload files to the specified folder
     clientAllowedFormats: ["images","jpg","png","mp4","mov","wmv","flv","avi","WebM","mkv"], //restrict uploading to image files only
@@ -248,7 +249,7 @@
   (error, result) => {
     if (!error && result && result.event === "success") {
       //console.log("Done! Here is the image info: ", result.info);
-     console.log(result.info);
+     //console.log(result.info);
 
      
       if(result.info.resource_type === 'image'){

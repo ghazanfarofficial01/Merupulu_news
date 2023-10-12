@@ -71,6 +71,7 @@ app.use(compression({
 }));
 
 
+
 //--------------------------------------------------------------
 //morgan
 // app.use(morgan('combined'))
@@ -94,6 +95,19 @@ app.use(compression({
 // app.use(morgan(':json', { stream: accessLogStream }));
 //-----------------------------------------------------------------
 
+
+//middleware to not not allow back button/telling browser not to save cache
+app.use((req, res, next) => {
+  // Prevent caching for all routes
+  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+  res.header('Expires', '-1');
+  res.header('Pragma', 'no-cache');
+  next();
+});
+
+// Compress all HTTP responses
+app.use(compression());
+>>>>>>> 99844cc8c4eefabd1b49f00f73670362d1af4cc9
 
 app.use(newsRouter);
 app.use(authRouter);

@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>News Article</title>
+     <script>
+      alert("Press Ctrl + P to print")
+    </script>
     <style>
       @font-face {
         font-family: 'NotoSansDevanagari';
@@ -71,7 +74,7 @@
       <img src="<%= url %>" alt="News Image" />
       <div class="article-content">
         <h1><%= article.title %></h1>
-        <p><%= article.description %></p>
+        <p><%= article.content %></p>
         <div class="author"><%= article.author %></div>
       </div>
     </div>

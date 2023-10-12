@@ -1,5 +1,5 @@
-const cloudName = "dydvdhjky"; 
-const uploadPreset = "fii6w2nc"; 
+const cloudName = "dr1ykbljn"; 
+const uploadPreset = "merupu"; 
 
 
 //   https://cloudinary.com/documentation/upload_widget_reference
