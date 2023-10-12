@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>API Logs</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      background-color: #3498db;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+    }
+
+    #log-content {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      padding: 20px;
+      margin: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <h1>API Logs</h1>
+  
+  <% for(let i = 1; i<logData.length;i++) { %>
+    <span><%= i %></span>
+    <h4 id="log-content"><%= logData[i-1] %></h4>
+    
+    <% } %>
+  <!-- <pre id="log-content"><%= logData %></pre> -->
+</body>
+</html>

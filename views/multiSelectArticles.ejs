@@ -15,47 +15,39 @@
     <div class="container">
         <!-- sidebar -->
         <%- include('./partials/sidebar')%>
-
-        <div class="main-content">
+       <form style="margin: 0px;width: 100%;">
+        <div style="width: 100%;" class="main-content">
             <!-- All Articles Table -->
-            <h2>All Unpublished District Articles</h2>
+            <h2>Published News</h2>
             <div class="articles-table">
                 <!-- Table to display all articles -->
                 <table>
                     <thead>
                         <tr>
+                            <th></th>
                             <th>Title</th>
                             <th>Reporter</th>
                             <th>Date</th>
                             <th>District</th>
                             <th>Image</th>
                             <th>Video</th>
-                            <th>Action</th>
-                        </tr>
+                            
+                            
                     </thead>
                     <tbody>
                         <!-- Populate table rows with all articles from the database -->
                         <% for (let article of articles) { %>
-                            
-                              
                         <tr>
                             <% date = article.publishedAt.toString().substring(0,16) %>
                             <% title = article.title.toString().substring(0,50) %>
+                            <td><input type="checkbox" name="articleId" value="<%= article._id %>"></td>
                             <td><%= title %></td>
                             <td><%= article.author %></td>
                             <td><%= date %></td>
-                            <td style="color: rgb(231, 154, 0);"><%= article.district %></td>
+                            <td style="font-size: x-small; height: min-content;"><span style="background-color: yellow;"><%= article.district %></span></td>
                             <td style="cursor: pointer;" onclick="window.location.href='<%= article.url %>'"><%= article.url === "" ? '❌' : '✔️' %></td>
                             <td style="cursor: pointer;" onclick="window.location.href='<%= article.videoUrl %>'" ><%= article.videoUrl === "" ? '❌' : '✔️' %></td>
-                            <td>
-                                <form style="display: inline;" method="POST" action="/admin/article/publish/<%= article._id%>?source=districtNews&_method=PUT">
-                                    <button class="btn-delete" style="background-color: aquamarine;">Publish</button>
-                                </form>
-                                <a href="/admin/article/<%= article._id%>/edit"><button class="btn-edit">Edit</button></a>
-                                <form style="display: inline;" method="POST" action="/admin/article/<%= article._id%>?source=unpublishedDistrictNews&_method=DELETE">
-                                    <button class="btn-delete">Delete</button>
-                                </form>
-                            </td>
+                            
                         </tr>
                         <% } %>
                         <!-- Add more rows as needed -->
@@ -63,6 +55,47 @@
                 </table>
             </div>
         </div>
+      
+        <button id="smt-btn" type="submit" >Delete</button>
+  
+    </form>
     </div>
+
+    <script>
+        document.getElementById('smt-btn').addEventListener('click', async function() {
+            const selectedArticleIds = [];
+            const checkboxes = document.getElementsByName('articleId');
+
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    selectedArticleIds.push(checkbox.value);
+                }
+            });
+
+            if (selectedArticleIds.length > 0) {
+                try {
+                    const response = await fetch('/admin/articles/multi?_method=DELETE', {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ selectedArticleIds })
+                    });
+
+                    if (response.ok) {
+                        // Provide feedback to the user
+                        alert('Selected articles deleted successfully');
+                        // You can also update the page to reflect the changes if needed
+                    } else {
+                        alert('Error deleting articles');
+                    }
+                } catch (error) {
+                    console.error(error);
+                }
+            } else {
+                alert('Please select articles to delete.');
+            }
+                });
+    </script>
 </body>
 </html>

@@ -1,0 +1,6 @@
+{"remote_addr":"::1","date":"2023-10-12T17:27:16.021Z","method":"GET","url":"/admin/allArticles/selectMulti?articleId=6506d13951a4f6246f9541a1&articleId=6501f21486f5d492a0058324&articleId=64f23762eaf6aad1a53153fb&articleId=64f228d377ee3fa7be6979e2&articleId=64f21242a79c20de3ebc2860&articleId=64f1e5bb4107d17e7495e9bf&articleId=64f1e2ec4107d17e7495e9a2","status":200,"response_time":"undefinedms"}
+{"remote_addr":"::1","date":"2023-10-12T17:27:19.594Z","method":"DELETE","url":"/admin/articles/multi?_method=DELETE","status":500,"response_time":"undefinedms"}
+{"remote_addr":"::1","date":"2023-10-12T17:27:21.685Z","method":"GET","url":"/admin/allArticles/selectMulti?articleId=64eee7372f6bda72e134572d","status":200,"response_time":"undefinedms"}
+{"remote_addr":"::1","date":"2023-10-12T17:27:50.298Z","method":"GET","url":"/admin/allArticles/selectMulti?articleId=64eee7372f6bda72e134572d","status":200,"response_time":"undefinedms"}
+{"remote_addr":"::1","date":"2023-10-12T17:27:59.173Z","method":"DELETE","url":"/admin/articles/multi?_method=DELETE","status":200,"response_time":"undefinedms"}
+{"remote_addr":"::1","date":"2023-10-12T17:28:00.930Z","method":"GET","url":"/admin/allArticles/selectMulti?articleId=6506d13951a4f6246f9541a1&articleId=6501f21486f5d492a0058324","status":200,"response_time":"undefinedms"}

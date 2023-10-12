@@ -3,6 +3,8 @@ const compression = require('compression');
 const session = require('express-session');
 const flash = require('express-flash');
 const methodOverride = require('method-override');
+const morgan = require('morgan');
+const fs = require('fs');
 const MongoDBStore = require("connect-mongodb-session")(session);
 if (process.env.NODE_ENV !== "production") {
     require('dotenv').config();
@@ -47,6 +49,8 @@ const advRouter = require('./routes/adv');
 const galleryRouter = require('./routes/gallery');
 const printRouter = require('./routes/print');
 const reporterRouter = require('./routes/reporter');
+const logRouter = require('./routes/logs');
+
 //middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -66,6 +70,31 @@ app.use(compression({
   level:9
 }));
 
+
+//--------------------------------------------------------------
+//morgan
+// app.use(morgan('combined'))
+// // Define a custom morgan token to log in JSON format
+// morgan.token('json', (req, res) => {
+//   return JSON.stringify({
+//     remote_addr: req.ip,
+//     date: new Date(),
+//     method: req.method,
+//     url: req.originalUrl,
+//     status: res.statusCode,
+//     response_time: `${res['response-time']}ms`,
+//   });
+// });
+// // Creating a write stream for logs
+// const accessLogStream = fs.createWriteStream(
+//   path.join(__dirname, 'access.log'),
+//   { flags: 'a' }
+// );
+// // Using Morgan to log API calls to a file
+// app.use(morgan(':json', { stream: accessLogStream }));
+//-----------------------------------------------------------------
+
+
 app.use(newsRouter);
 app.use(authRouter);
 app.use(dashRouter);
@@ -75,6 +104,7 @@ app.use(advRouter)
 app.use(galleryRouter)
 app.use(printRouter)
 app.use(reporterRouter)
+//app.use(logRouter)
 //db connection
 mongoose.connect(DB).then(()=>{
     console.log('connection successful');

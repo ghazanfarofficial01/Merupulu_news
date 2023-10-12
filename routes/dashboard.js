@@ -77,7 +77,30 @@ dashRouter.get('/admin/dashboard',isAuth, async(req, res) => {
       res.status(500).json({error: e.message})
     }
    })
+
+
+   //Multi Select all article page render route
+  dashRouter.get('/admin/allArticles/selectMulti', isAuth, async (req, res) => {
+    try{
+      const articles = await News.find({published:true}).sort({publishedAt:-1}).exec();
+      //console.log(articles)
+      res.render("multiSelectArticles",{articles});
+    } catch(e){
+      res.status(500).json({error: e.message})
+    }
+   })
    
+   dashRouter.delete('/admin/articles/multi',isAuth, async (req,res) =>{
+    try{
+      const selectedArticleIds = req.body.selectedArticleIds;
+      await News.deleteMany({ _id: { $in: selectedArticleIds } });
+      res.send('Selected articles deleted successfully');
+  
+    } catch(e){
+      res.status(500).json({error: e.message})
+    }
+  })
+
    //all users page render route
    dashRouter.get('/admin/allUsers', isAuth, async (req, res) => {
     try{
