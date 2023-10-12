@@ -107,7 +107,7 @@ app.use((req, res, next) => {
 
 // Compress all HTTP responses
 app.use(compression());
->>>>>>> 99844cc8c4eefabd1b49f00f73670362d1af4cc9
+
 
 app.use(newsRouter);
 app.use(authRouter);
