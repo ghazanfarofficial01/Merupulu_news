@@ -95,7 +95,7 @@ dashRouter.get('/admin/dashboard',isAuth, async(req, res) => {
       'Content-Type': 'application/json',
     };
 
-    const notifying = await axios.post('https://merupulu-news.onrender.com/notification/topic/breaking', notifyData,{headers});
+    const notifying = await axios.post('http://localhost:3000/notification/topic/breaking', notifyData,{headers});
     console.log('Response from:', notifying.data);
      
     //redirection
