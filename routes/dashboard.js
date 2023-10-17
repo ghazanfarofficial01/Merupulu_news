@@ -5,8 +5,8 @@ const isAuth = require('../middlewares/isAuth')
 const mongoose = require('mongoose');
 const News = require("../Models/articles")
 const User = require('../Models/user');
-
-
+const axios = require('axios');
+const authToken = process.env.api_key;
 
 dashRouter.get('/admin/dashboard',isAuth, async(req, res) => {
     try{
@@ -61,8 +61,9 @@ dashRouter.get('/admin/dashboard',isAuth, async(req, res) => {
 
    //publishing unpublished articles
    dashRouter.put('/admin/article/publish/:id',isAuth,async(req,res)=>{
+    try{
     const id = req.params.id;
-    const article = await News.findById(id);
+    //const article = await News.findById(id);
     
     const updatedArticle = await News.findByIdAndUpdate(id, { published:true, publishedAt:Date.now()});
     //console.log(updatedArticle);
@@ -70,29 +71,55 @@ dashRouter.get('/admin/dashboard',isAuth, async(req, res) => {
       res.redirect("/admin/district/unpublished");
     }
     else res.redirect("/admin/unpublished");  
+  }catch(e){
+    res.status(500).json({error: e.message})
+  }
   })  
 
-  //publishing unpublished articles
-  dashRouter.put('/admin/article/publish/:id',isAuth,async(req,res)=>{
+  //publishing unpublished articles and sending notification
+  dashRouter.put('/admin/article/publish/notify/:id',isAuth,async(req,res)=>{
+    try{
     const id = req.params.id;
-    const article = await News.findById(id);
-    
+    //const article = await News.findById(id);
     const updatedArticle = await News.findByIdAndUpdate(id, { published:true, publishedAt:Date.now()});
-    //console.log(updatedArticle);
+ 
+    
+    //sending notification
+    let notifyData = {
+      title: updatedArticle.title,
+      body: "abcdefghijklmnopqrstuvwxyz"
+    }
+
+    const headers = {
+      'Authorization': `Bearer ${authToken}`,
+      'Content-Type': 'application/json',
+    };
+
+    const notifying = await axios.post('http://localhost:3000/notification/topic/breaking', notifyData,{headers});
+    console.log('Response from:', notifying.data);
+     
+    //redirection
     if(req.query.source === 'districtNews'){
       res.redirect("/admin/district/unpublished");
     }
     else res.redirect("/admin/unpublished");  
+  }catch(e){
+    res.status(500).json({error: e.message})
+  }
   })
 
   //unpublishing published articles
   dashRouter.put('/admin/article/unpublish/:id',isAuth,async(req,res)=>{
+    try{
     const id = req.params.id;
     const article = await News.findById(id);
     
     const updatedArticle = await News.findByIdAndUpdate(id, { published:false});
     //console.log(updatedArticle);
     res.redirect("/admin/allArticles");
+    }catch(e){
+      res.status(500).json({error: e.message})
+    }
   })
 
   //all article page render route

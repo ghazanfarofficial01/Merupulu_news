@@ -45,7 +45,10 @@
                             <td style="cursor: pointer;" onclick="window.location.href='<%= article.videoUrl %>'" ><%= article.videoUrl === "" ? '❌' : '✔️' %></td>
                             <td>
                                 <form style="display: inline;" method="POST" action="/admin/article/publish/<%= article._id%>?_method=PUT">
-                                    <button class="btn-delete" style="background-color: aquamarine;">Publish</button>
+                                    <button class="btn-delete" style="background-color: aquamarine;">Publish🔕</button>
+                                </form>
+                                <form style="display: inline;" method="POST" action="/admin/article/publish/notify/<%= article._id%>?_method=PUT">
+                                    <button class="btn-delete" style="background-color: aquamarine;">Publish🔔</button>
                                 </form>
                                 <a href="/admin/article/<%= article._id%>/edit"><button class="btn-edit">Edit</button></a>
                                 <form style="display: inline;" method="POST" action="/admin/article/<%= article._id%>?source=unpublishedNews&_method=DELETE">

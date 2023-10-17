@@ -181,7 +181,7 @@ input {
     font-size: 17px;
     padding: 4px 32px;
     position: fixed;
-    bottom: 1%;
+    bottom: 0%;
     right: 31%;
     z-index: 1000;
     width: 26%;
@@ -190,7 +190,7 @@ input {
     text-decoration: none;
     /* border: none; */
     /* border-radius: 5px; */
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    box-shadow: rgba(0, 0, 0, 0.7) 0px 5px 15px;
 
 
 
@@ -200,5 +200,5 @@ input {
 }
 
 #smt-btn:hover{
-   background-color: #c80202;
+   background-color: rgb(226, 0, 0);
 }

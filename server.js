@@ -50,7 +50,7 @@ const galleryRouter = require('./routes/gallery');
 const printRouter = require('./routes/print');
 const reporterRouter = require('./routes/reporter');
 const logRouter = require('./routes/logs');
-
+const NotificationRouter = require('./routes/notification');
 //middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -108,7 +108,7 @@ app.use((req, res, next) => {
 // Compress all HTTP responses
 app.use(compression());
 
-
+app.use(NotificationRouter);
 app.use(newsRouter);
 app.use(authRouter);
 app.use(dashRouter);

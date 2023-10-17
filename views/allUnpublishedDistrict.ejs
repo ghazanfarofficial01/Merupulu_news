@@ -36,10 +36,7 @@
                     <tbody>
                         <!-- Populate table rows with all articles from the database -->
                         <% for (let article of articles) { %>
-<<<<<<< HEAD
-                            
-=======
->>>>>>> 99844cc8c4eefabd1b49f00f73670362d1af4cc9
+
                               
                         <tr>
                             <% date = article.publishedAt.toString().substring(0,16) %>
@@ -48,10 +45,9 @@
                             <td><%= article.author %></td>
                             <td><%= date %></td>
                             <td style="color: rgb(231, 154, 0);"><%= article.district %></td>
-<<<<<<< HEAD
-=======
+
                             <td style="color: rgb(231, 154, 0);"><%= article.district %></td>
->>>>>>> 99844cc8c4eefabd1b49f00f73670362d1af4cc9
+
                             <td style="cursor: pointer;" onclick="window.location.href='<%= article.url %>'"><%= article.url === "" ? '❌' : '✔️' %></td>
                             <td style="cursor: pointer;" onclick="window.location.href='<%= article.videoUrl %>'" ><%= article.videoUrl === "" ? '❌' : '✔️' %></td>
                             <td>
