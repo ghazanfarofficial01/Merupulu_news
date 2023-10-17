@@ -4,7 +4,7 @@ const NotificationRouter = express.Router();
 const keyAuth = require('../middlewares/keyAuth')
 const admin = require('firebase-admin');
 //const serviceAccount = require('../serviceAccountKey.json');
-const serviceAccount = require(process.env.serviceKeyPath) || require('../serviceAccountKey.json');
+const serviceAccount = require('../serviceAccountKey.json');
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
